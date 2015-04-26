@@ -1,0 +1,8 @@
+# swap files from Vim
+*.swp
+
+# object files from compiler
+*.o
+
+# binary
+apostle
