@@ -85,7 +85,7 @@ bool	handle_arguments ( int argc, char** argv )
 		switch ( identify_argument(argv[count]) ) {
 			case ARG_UNKNWN:
 				std::cerr << "error: undefined argument \'" << argv[count] 
-					<< "\'.\n\n";
+					<< "\'.\n";
 				/* break not needed as it will go to help */
 			case ARG_HELP:
 				cont	= false;
@@ -93,7 +93,7 @@ bool	handle_arguments ( int argc, char** argv )
 				break;
 			default:
 				cont	= false;
-				std::cerr << "error: unknown error\n\n";
+				std::cerr << "error: unknown error\n";
 				break;
 		}
 	}
