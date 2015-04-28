@@ -12,6 +12,8 @@
 #include <iostream>
 #include <cstring>
 
+#include "world.hpp"
+
 enum	argid {
 	/* argument identifiers */
 	ARG_HELP	= 0,
@@ -101,6 +103,9 @@ bool	handle_arguments ( int argc, char** argv )
 
 int	main ( int argc, char** argv )
 {
+	world	*w;
+	tset2	*tset;
+
 	/* beginning newline (to seperate the program output from the
 	 * rest of the terminal's).					*/
 	std::cout << '\n';
@@ -110,6 +115,19 @@ int	main ( int argc, char** argv )
 	std::cout << '\n';
 
 	handle_arguments ( argc, argv );
+
+	w	= new world;
+
+	tset	= w->build_tileset ( 25, 25 );
+
+	std::cout << tset->dime.x << ' ' << tset->dime.y << '\n';
+
+	for ( int ycount = 0; ycount < tset->dime.y; ycount++ ) {
+		for ( int xcount = 0; xcount < tset->dime.x; xcount++ ) {
+			std::cout << tset->set[xcount][ycount];
+		}
+		std::cout << '\n';
+	}
 
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
