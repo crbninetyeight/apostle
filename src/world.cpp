@@ -24,3 +24,8 @@ tset2*	world::build_tileset ( const int x, const int y )
 
 	return	&retset;
 }
+
+world::world ( int world_x, int world_y )
+{
+	/* world(): build the world */
+}

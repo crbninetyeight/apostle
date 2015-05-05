@@ -22,7 +22,8 @@ class	world {
 	private:
 		tset2	tset;
 	public:
-		tset2*	build_tileset ( const int x, const int y );
+		tset2*	build_tileset ( const int x, const int y );	/* tileset builder */
+		world ( int world_x, int world_y );			/* world initializer */
 };
 
 #endif	/* APO_WORLD_HPP__ */

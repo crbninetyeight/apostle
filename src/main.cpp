@@ -109,7 +109,6 @@ bool	handle_arguments ( int argc, char** argv )
 int	main ( int argc, char** argv )
 {
 	world	*w;		/* world (not yet initialized) */
-	tset2	*tset;		/* tileset (not yet initialized) */
 
 	/* beginning newline (to seperate the program output from the
 	 * rest of the terminal's).					*/
@@ -122,12 +121,7 @@ int	main ( int argc, char** argv )
 	handle_arguments ( argc, argv );
 
 	/* initialize the world class */
-	w	= new world;
-
-	/* initialize the tileset */
-	tset	= w->build_tileset ( 25, 25 );
-
-	std::cout << tset->dime.x << ' ' << tset->dime.y << '\n';
+	w	= new world ( 25, 25 );
 
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
