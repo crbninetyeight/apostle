@@ -1,7 +1,7 @@
 /*	array_cast.cpp: can arrays be casted to pointers?
  *
  *	given a structure that contains
- *		a. int**
+ *		a. a pointer
  *		b. the given dimensions of the array
  *
  *	can an array be casted to it?				*/
