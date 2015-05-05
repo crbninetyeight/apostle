@@ -129,13 +129,6 @@ int	main ( int argc, char** argv )
 
 	std::cout << tset->dime.x << ' ' << tset->dime.y << '\n';
 
-	for ( int ycount = 0; ycount < tset->dime.y; ycount++ ) {
-		for ( int xcount = 0; xcount < tset->dime.x; xcount++ ) {
-			std::cout << tset->set[xcount][ycount];
-		}
-		std::cout << '\n';
-	}
-
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
 	return	0;
