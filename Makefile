@@ -6,7 +6,7 @@ dirobj	= obj/
 dirbin	= bin/
 
 # required objects (append as needed)
-deps	= main world
+deps	= main world objects
 objs	= $(addprefix $(dirobj), $(addsuffix .o, $(deps)))
 
 # build variables:
