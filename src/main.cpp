@@ -12,14 +12,16 @@
 #include <iostream>
 #include <cstring>
 
+/* APOSTLE libraries */
 #include "world.hpp"
 
+/* argument identifiers */
 enum	argid {
-	/* argument identifiers */
-	ARG_HELP	= 0,
-	ARG_UNKNWN
+	ARG_HELP	= 0,		/* help argument */
+	ARG_UNKNWN			/* an unknown argument */
 };
 
+/* print the init message */
 void	print_init_msg ( )
 {
 	/* the message displayed when starting apostle
@@ -41,6 +43,7 @@ void	print_init_msg ( )
 	std::cout << msg_init << '\n';
 }
 
+/* print the help message and a short description */
 void	print_help_msg ( )
 {
 	/* message that describes usage information */
@@ -103,8 +106,8 @@ bool	handle_arguments ( int argc, char** argv )
 
 int	main ( int argc, char** argv )
 {
-	world	*w;
-	tset2	*tset;
+	world	*w;		/* world (not yet initialized) */
+	tset2	*tset;		/* tileset (not yet initialized) */
 
 	/* beginning newline (to seperate the program output from the
 	 * rest of the terminal's).					*/
@@ -116,8 +119,10 @@ int	main ( int argc, char** argv )
 
 	handle_arguments ( argc, argv );
 
+	/* initialize the world class */
 	w	= new world;
 
+	/* initialize the tileset */
 	tset	= w->build_tileset ( 25, 25 );
 
 	std::cout << tset->dime.x << ' ' << tset->dime.y << '\n';
