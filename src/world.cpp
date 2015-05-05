@@ -4,6 +4,11 @@
 
 tset2*	world::build_tileset ( const int x, const int y )
 {
+	/* build_tileset: build a tileset and return its pointer 
+	 *
+	 * return value:
+	 * 	if there was an error, -1, else the pointer of tset2
+	 * 	is returned.						*/
 	tile		retile[x][y];
 	static tset2	retset;
 
