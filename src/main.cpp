@@ -84,7 +84,7 @@ bool	handle_arguments ( int argc, char** argv )
 	 * 	false:	error occured while handling arguments.
 	 */
 
-	bool	cont = true;
+	bool	cont = true, ret = false;
 
 	for ( int count = 1; count <= argc-1 && cont; count++ ) {
 		switch ( identify_argument(argv[count]) ) {
@@ -102,6 +102,8 @@ bool	handle_arguments ( int argc, char** argv )
 				break;
 		}
 	}
+
+	return	ret;
 }
 
 int	main ( int argc, char** argv )
