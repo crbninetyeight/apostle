@@ -38,7 +38,10 @@ int	main ( int argc, char** argv )
 	bookshelf.book		= (int *)books;
 
 	/* now we extract the information from bookshelf */
-	std::cout << (int)bookshelf.book[12][12] << '\n';
+	int (*c)[bookshelf.dimension.width][bookshelf.dimension.height]
+		= (int(*)[bookshelf.dimension.width][bookshelf.dimension.height])bookshelf.book;
+
+	std::cout << c[12][12] << '\n';
 
 	return	0;
 }
