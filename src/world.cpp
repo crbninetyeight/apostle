@@ -2,6 +2,11 @@
 
 #include "world.hpp"
 
+tset2*	world::get_tileset ( void )
+{
+	return	tset;
+}
+
 tset2*	world::build_tileset ( const int x, const int y )
 {
 	/* build_tileset: build a tileset and return its pointer 
@@ -18,7 +23,7 @@ tset2*	world::build_tileset ( const int x, const int y )
 		}
 	}
 
-	retset.set	= (tile **)retile;
+	retset.set	= (tile *)retile;
 	retset.dime.x	= x;
 	retset.dime.y	= y;
 
@@ -32,5 +37,8 @@ world::world ( int world_x, int world_y )
 	 * todo:
 	 * 	! make world_x and world_y be anything at the
 	 *	expense of user resources, instead of using a
-	 *	finite limit.					*/
+	 *	finite limit.					
+	 *	  ? attempting to do above with pointers	*/
+	
+	tset	= build_tileset ( world_x, world_y );
 }

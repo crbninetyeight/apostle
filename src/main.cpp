@@ -109,6 +109,7 @@ bool	handle_arguments ( int argc, char** argv )
 int	main ( int argc, char** argv )
 {
 	world	*w;		/* world (not yet initialized) */
+	tset2	*p;
 
 	/* beginning newline (to seperate the program output from the
 	 * rest of the terminal's).					*/
@@ -122,6 +123,14 @@ int	main ( int argc, char** argv )
 
 	/* initialize the world class */
 	w	= new world ( 25, 25 );
+	p	= w->get_tileset();
+
+	for ( int county = 0; county < p->dime.y; county++ ) {
+		for ( int countx = 0; countx < p->dime.x; countx++ ) {
+			std::cout << (int[25][25])p->set[countx][county];
+		}
+		std::cout << '\n';
+	}
 
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
