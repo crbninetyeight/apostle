@@ -27,5 +27,10 @@ tset2*	world::build_tileset ( const int x, const int y )
 
 world::world ( int world_x, int world_y )
 {
-	/* world(): build the world */
+	/* world(): build the world
+	 *
+	 * todo:
+	 * 	! make world_x and world_y be anything at the
+	 *	expense of user resources, instead of using a
+	 *	finite limit.					*/
 }
