@@ -21,11 +21,20 @@ target	= $(dirbin)$(exe)
 
 all:		$(target)
 
-$(target):	$(objs)
+$(target):	$(dirsrc) $(dirobj) $(dirbin) $(objs)
 	g++ -o $@ $(objs)
 
 $(dirobj)%.o:	$(dirsrc)%.cpp
 	g++ -o $@ $(opts) -c $<
+
+$(dirsrc):
+	echo "error: src directory can not be created"
+
+$(dirobj):
+	mkdir -p $(dirobj)
+
+$(dirbin):
+	mkdir -p $(dirbin)
 
 clean:
 	rm -f $(target) $(dirobj)*.o
