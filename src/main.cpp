@@ -10,8 +10,19 @@
 
 /* STANDARD libraries */
 #include <iostream>
+#include <cstring>
 
-int	main ( int argc, char** argv )
+/* APOSTLE libraries */
+#include "world.hpp"
+
+/* argument identifiers */
+enum	argid {
+	ARG_HELP	= 0,		/* help argument */
+	ARG_UNKNWN			/* an unknown argument */
+};
+
+/* print the init message */
+void	print_init_msg ( )
 {
 	/* the message displayed when starting apostle
 	 *
@@ -29,12 +40,94 @@ int	main ( int argc, char** argv )
 			" are not protected from the user. You have been\n"
 			" warned.";
 
-	/* beginning newline ( to seperate the program output from the
-	 * rest of the terminal's ).					*/
+	std::cout << msg_init << '\n';
+}
+
+/* print the help message and a short description */
+void	print_help_msg ( )
+{
+	/* message that describes usage information */
+	char	*msg_help =
+			(char *)
+			" USAGE:\n"
+			"   apostle [options]\n"
+			"\n"
+			" OPTIONS:\n"
+			"   -h, --help:\n"
+			"         display this message.";
+
+	std::cout << msg_help << '\n';
+}
+
+argid	identify_argument ( char* arg )
+{
+	/* identify_argument: identifies the given argument
+	 *
+	 * return value:
+	 * 	integer value of the associated argument.
+	 */
+
+	argid	retid = ARG_UNKNWN;
+
+	if ( strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0 )
+		retid	= ARG_HELP;
+
+	return	retid;
+}
+
+bool	handle_arguments ( int argc, char** argv )
+{
+	/* handle_arguments: handles arguments
+	 * 
+	 * return value:
+	 * 	true:	handled arguments without error.
+	 * 	false:	error occured while handling arguments.
+	 */
+
+	bool	cont = true, ret = false;
+
+	for ( int count = 1; count <= argc-1 && cont; count++ ) {
+		switch ( identify_argument(argv[count]) ) {
+			case ARG_UNKNWN:
+				std::cerr << "error: undefined argument \'" << argv[count] 
+					<< "\'.\n";
+				/* break not needed as it will go to help */
+			case ARG_HELP:
+				cont	= false;
+				print_help_msg ( );
+				break;
+			default:
+				cont	= false;
+				std::cerr << "error: unknown error\n";
+				break;
+		}
+	}
+
+	return	ret;
+}
+
+int	main ( int argc, char** argv )
+{
+	world	*w;		/* world (not yet initialized) */
+	tset2	*tset;		/* tileset (not yet initialized) */
+
+	/* beginning newline (to seperate the program output from the
+	 * rest of the terminal's).					*/
 	std::cout << '\n';
 
 	/* the message displayed at the beginning of apostle's execution */
-	std::cout << msg_init << '\n';
+	print_init_msg ( );
+	std::cout << '\n';
+
+	handle_arguments ( argc, argv );
+
+	/* initialize the world class */
+	w	= new world;
+
+	/* initialize the tileset */
+	tset	= w->build_tileset ( 25, 25 );
+
+	std::cout << tset->dime.x << ' ' << tset->dime.y << '\n';
 
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
