@@ -14,16 +14,18 @@ tset2*	world::build_tileset ( const int x, const int y )
 	 * return value:
 	 * 	if there was an error, -1, else the pointer of tset2
 	 * 	is returned.						*/
-	tile		retile[x][y];
+	tile		(* rtile)[x][y];
 	static tset2	retset;
+
+	rtile		= new tile * [x];
 
 	for ( int ycount = 0; ycount < y; ycount++ ) {
 		for ( int xcount = 0; xcount < x; xcount++ ) {
-			retile[xcount][ycount]	= TILE_BLANK;
+			rtile[xcount][ycount]	= TILE_BLANK;
 		}
 	}
 
-	retset.set	= (tile **)retile[x][y];
+	retset.set	= rtile;
 	retset.dime.x	= x;
 	retset.dime.y	= y;
 
