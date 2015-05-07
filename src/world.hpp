@@ -13,7 +13,7 @@ struct	dime2 {
 
 /* structure that contains tilesets */
 struct	tset2 {
-	tile*	set;	/* the set */
+	tile**	set;	/* the set (2-dimensional) */
 	dime2	dime;	/* the dimensions of the set */
 };
 

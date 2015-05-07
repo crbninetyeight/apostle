@@ -23,7 +23,7 @@ tset2*	world::build_tileset ( const int x, const int y )
 		}
 	}
 
-	retset.set	= (tile *)retile;
+	retset.set	= (tile **)retile[x][y];
 	retset.dime.x	= x;
 	retset.dime.y	= y;
 
