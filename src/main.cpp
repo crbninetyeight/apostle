@@ -118,6 +118,7 @@ int	main ( int argc, char** argv )
 	print_init_msg ( );
 	std::cout << '\n';
 
+	/* handle arguments given by the user */
 	handle_arguments ( argc, argv );
 
 	/* initialize the world class */
@@ -125,5 +126,9 @@ int	main ( int argc, char** argv )
 
 	/* ending newline ( same purpose as the beginning one ). */
 	std::cout << '\n';
+
+	/* free memory used by the world object */
+	delete	w;
+
 	return	0;
 }
