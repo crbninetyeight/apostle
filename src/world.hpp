@@ -1,9 +1,25 @@
 #ifndef	APO_WORLD_HPP__
 #define	APO_WORLD_HPP__
 
+/* structure that contains dimension information */
+struct	dime2 {
+	int	width, height;
+};
+
+/* structure that contains position information */
+struct	pos2 {
+	int	x, y;
+};
+
 /* enumerator that describes tile types */
-enum	tile {
+enum	tile_t {
 	TILE_BLANK
+};
+
+/* structure that describes tiles */
+struct	tile {
+	tile_t	type;
+	pos2	location;
 };
 
 /* structure that contains dimension information */
