@@ -40,8 +40,24 @@ tset2::tset2 ( int x, int y )
 	this->dime.height	= y;
 }
 
+tset2::~tset2 ( void )
+{
+	/* destructor of tset2 */
+	for ( int count = 0; count < this->dime.height; count++ ) {
+		delete[]	this->set[count];
+	}
+
+	delete[]	this->set;
+}
+
 world::world ( int world_x, int world_y )
 {
 	/* world(): build the world */
 	this->set	= new tset2 ( world_x, world_y );
+}
+
+world::~world ( void )
+{
+	/* world destructor */
+	delete	this->set;
 }
