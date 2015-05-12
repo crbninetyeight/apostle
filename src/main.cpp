@@ -75,6 +75,34 @@ argid	identify_argument ( char* arg )
 	return	retid;
 }
 
+void	prompt_error ( const char* msg, bool interactive )
+{
+	/* prompt the user an error message and (optionally) decide whether
+	 * to continue or not.
+	 *
+	 * arguments:
+	 * 	msg:		the message string to be displayed.
+	 * 	interactive:	wait for user input (true) or not (false).	*/
+
+	char	in;	/* single character input */
+
+
+	if ( !interactive ) {
+		/* print output to cerr as this may be suppressed */
+		std::cerr << "error: " << msg << '\n';
+	} else {
+		/* print output to cout as the user will need to
+		 * see it to continue */
+		std::cout << "error: " << msg << '\n';
+		
+		/* now wait for input */
+		std::cin >> in;
+
+		/* there is no other code after this point as it is
+		 * not needed as of writing */
+	}
+}
+
 bool	handle_arguments ( int argc, char** argv )
 {
 	/* handle_arguments: handles arguments
@@ -89,8 +117,7 @@ bool	handle_arguments ( int argc, char** argv )
 	for ( int count = 1; count <= argc-1 && cont; count++ ) {
 		switch ( identify_argument(argv[count]) ) {
 			case ARG_UNKNWN:
-				std::cerr << "error: undefined argument \'" << argv[count] 
-					<< "\'.\n";
+				prompt_error ( "unknown argument", false );
 				/* break not needed as it will go to help */
 			case ARG_HELP:
 				cont	= false;
@@ -98,7 +125,7 @@ bool	handle_arguments ( int argc, char** argv )
 				break;
 			default:
 				cont	= false;
-				std::cerr << "error: unknown error\n";
+				prompt_error ( "unknown error", false );
 				break;
 		}
 	}
@@ -108,7 +135,7 @@ bool	handle_arguments ( int argc, char** argv )
 
 int	main ( int argc, char** argv )
 {
-	world	*w;		/* world (not yet initialized) */
+	world	*w;	/* world (not yet initialized) */
 
 
 	/* beginning newline (to seperate the program output from the
