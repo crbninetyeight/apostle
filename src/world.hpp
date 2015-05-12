@@ -14,24 +14,18 @@ struct	dime2 {
 /* class that contains tilesets */
 class	tset2 {
 	private:
-	tile**	set;	/* the set */
+	tile	**set;	/* the set */
 	dime2	dime;	/* the dimensions of the set */
 	public:
-	tset2 ( int x, int y ) {
-		/* build a tileset array given the parameters */
-		this->set	= new tile*[y];
-		for ( int count = 0; count < y; i++ ) {
-			this->set[count] = new tile[x];
-		}
-	}
+	tset2 ( int x, int y );	/* build a tileset given the parameters */
 };
 
 /* class that contains tilesets and other world information */
 class	world {
 	private:
-		tset2	set;	/* the set of tiles needed for world manipulation */
+	tset2	*set;	/* the set of tiles needed for world manipulation */
 	public:
-		world ( int world_x, int world_y );			/* world initializer */
+	world ( int world_x, int world_y );	/* world initializer */
 };
 
 #endif	/* APO_WORLD_HPP__ */

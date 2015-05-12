@@ -108,5 +108,10 @@ bool	handle_arguments ( int argc, char** argv )
 
 int	main ( int argc, char** argv )
 {
+	world	*w;
+
+	w	= new world ( 100, 100 );
+	delete	w;
+
 	return	0;
 }
