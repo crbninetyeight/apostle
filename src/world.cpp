@@ -6,8 +6,8 @@ tset2::tset2 ( int x, int y )
 {
 	/* build a tileset given the parameters */
 	this->set	= new tile*[y];
-	for ( int count = 0; count < y; count++ ) {
-		this->set[count]	= new tile[x];
+	for ( int i = 0; i < y; i++ ) {
+		this->set[i]	= new tile[x];
 	}
 
 	/* add dimensional contexts to the class */
@@ -30,8 +30,8 @@ tset2::tset2 ( int x, int y )
 tset2::~tset2 ( void )
 {
 	/* destructor of tset2 */
-	for ( int count = 0; count < this->dime.height; count++ ) {
-		delete[]	this->set[count];
+	for ( int i = 0; i < this->dime.height; i++ ) {
+		delete[]	this->set[i];
 	}
 
 	delete[]	this->set;
