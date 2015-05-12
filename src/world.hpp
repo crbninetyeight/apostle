@@ -11,10 +11,19 @@ struct	dime2 {
 	int	x, y;
 };
 
-/* structure that contains tilesets */
-struct	tset2 {
-	// tile**	set;	/* the set */
+/* class that contains tilesets */
+class	tset2 {
+	private:
+	tile**	set;	/* the set */
 	dime2	dime;	/* the dimensions of the set */
+	public:
+	tset2 ( int x, int y ) {
+		/* build a tileset array given the parameters */
+		this->set	= new tile*[y];
+		for ( int count = 0; count < y; i++ ) {
+			this->set[count] = new tile[x];
+		}
+	}
 };
 
 /* class that contains tilesets and other world information */
