@@ -110,6 +110,7 @@ int	main ( int argc, char** argv )
 {
 	world	*w;		/* world (not yet initialized) */
 
+
 	/* beginning newline (to seperate the program output from the
 	 * rest of the terminal's).					*/
 	std::cout << '\n';
@@ -129,6 +130,7 @@ int	main ( int argc, char** argv )
 
 	/* free memory used by the world object */
 	delete	w;
+
 
 	return	0;
 }
