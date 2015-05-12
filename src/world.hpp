@@ -8,7 +8,7 @@ enum	tile {
 
 /* structure that contains dimension information */
 struct	dime2 {
-	int	x, y;
+	int	width, height;
 };
 
 /* class that contains tilesets */

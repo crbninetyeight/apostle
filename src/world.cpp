@@ -35,6 +35,9 @@ tset2::tset2 ( int x, int y )
 	for ( int count = 0; count < y; count++ ) {
 		this->set[count]	= new tile[x];
 	}
+
+	this->dime.width	= x;
+	this->dime.height	= y;
 }
 
 world::world ( int world_x, int world_y )
