@@ -14,7 +14,7 @@ tset2::tset2 ( int x, int y )
 	this->dime.width	= x;
 	this->dime.height	= y;
 
-	/* fill in all tiles in the set with blanks */
+	/* fill in all tiles of the set with blanks */
 	for ( int iy = 0; iy < this->dime.height; iy++ ) {
 		for ( int ix = 0; ix < this->dime.width; ix++ ) {
 			this->set[ix][iy].type
