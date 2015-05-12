@@ -22,11 +22,6 @@ struct	tile {
 	pos2	location;
 };
 
-/* structure that contains dimension information */
-struct	dime2 {
-	int	width, height;
-};
-
 /* class that contains tilesets */
 class	tset2 {
 	private:
