@@ -132,15 +132,15 @@ int	main(int argc, char** argv)
 	int		input;	// input variable
 	world	*w;		// world (not yet initialized)
 
-	std::cout << '\n';				// output newline
-	print_init_msg();				// the message displayed at the beginning of apostle's execution
-	std::cout << '\n';				// output newline
+	std::cout << '\n';	// output newline
+	print_init_msg();	// the message displayed at the beginning of apostle's execution
+	std::cout << '\n';	// output newline
 	handle_arguments(argc, argv);	// handle arguments given by the user
-	std::cin >> input;				// pause for input
-	w = new world(2500, 2500);		// initialize the world class
-	std::cout << '\n';				// ending newline (same purpose as the beginning one).
-	std::cin  >> input;				// pause for input
-	delete w;						// free memory used by the world object
+	std::cin >> input;	// pause for input
+	w = new world(2500, 2500);	// initialize the world class
+	std::cout << '\n';	// ending newline (same purpose as the beginning one).
+	std::cin  >> input;	// pause for input
+	delete w;
 
 	return 0;	// return exit status
 }
