@@ -6,32 +6,32 @@
 /* enumerator that defines object types */
 enum	object_t {
 	/* entities */
-	OBJECT_LIVING,		/* living entities (actors, npcs, zombies...) */
+	OBJECT_LIVING,		// living entities (actors, npcs, zombies...)
 	/* openables */
-	OBJECT_DOOR,		/* objects that can be opened to be passed through (doors, windows...) */
-	OBJECT_CONTAINER,	/* objects that can contain other objects (chests, safes...) */
+	OBJECT_DOOR,		// objects that can be opened to be passed through (doors, windows...)
+	OBJECT_CONTAINER,	// objects that can contain other objects (chests, safes...)
 	/* consumables */
-	OBJECT_FOOD,		/* objects that can be consumed for health and hunger (edibles, soups...) */
-	OBJECT_WATER,		/* objects that can be consumed for health and thirst (water, soda...) */
-	OBJECT_MEDICINE,	/* objects that can be consumed for health and sickness (pills, vaccines...) */
+	OBJECT_FOOD,		// objects that can be consumed for health and hunger (edibles, soups...)
+	OBJECT_WATER,		// objects that can be consumed for health and thirst (water, soda...)
+	OBJECT_MEDICINE,	// objects that can be consumed for health and sickness (pills, vaccines...)
 	/* usables */
-	OBJECT_WEAPON,		/* objects that can be used to cause damage (guns, bats, knives...) */
-	OBJECT_USABLE,		/* objects that can be used on other objects (keys, matches...) */
+	OBJECT_WEAPON,		// objects that can be used to cause damage (guns, bats, knives...)
+	OBJECT_USABLE,		// objects that can be used on other objects (keys, matches...)
 	/* other */
-	OBJECT_MISC,		/* objects that have little value (decorations, blood, rocks...) */
-	OBJECT_UNKNWN		/* an unknown object (usually in error) */
+	OBJECT_MISC,		// objects that have little value (decorations, blood, rocks...)
+	OBJECT_UNKNWN		// an unknown object (usually in error)
 };
 
 /* main object class */
 class	object {
 	private:
 		object_t
-			type;		/* the object's type */
+			type;		// the object's type
 
 		int
-			health,		/* condition of the object */
-			strength,	/* object resistance */
-			mass;		/* combined mass of the object */
+			health,		// condition of the object
+			strength,	// object resistance
+			mass;		// combined mass of the object
 	public:
 		/* these functions return the variables above */
 		object_t

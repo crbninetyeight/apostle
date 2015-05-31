@@ -17,8 +17,8 @@
 
 /* argument identifiers */
 enum	argid {
-	ARG_HELP	= 0,		/* help argument */
-	ARG_UNKNWN			/* an unknown argument */
+	ARG_HELP	= 0,	// help argument
+	ARG_UNKNWN	// an unknown argument
 };
 
 /* print the init message */
@@ -90,7 +90,7 @@ void	prompt_error ( const char* msg, bool interactive )
 		std::cerr << "error: " << msg << '\n';	// print output to cerr as this may be suppressed
 	} else {
 		std::cout << "error: " << msg << '\n';	// print output to cout as the user will need to see it to continue
-		std::cin  >> in;						// wait for input
+		std::cin  >> in;	// wait for input
 
 		/* there is no other code after this point as it is
 		 * not needed as of writing */
