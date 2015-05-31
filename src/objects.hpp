@@ -28,7 +28,8 @@ class	object {
 		object_t
 			type;		/* the object's type */
 
-		int	health,		/* condition of the object */
+		int
+			health,		/* condition of the object */
 			strength,	/* object resistance */
 			mass;		/* combined mass of the object */
 	public:
@@ -36,12 +37,14 @@ class	object {
 		object_t
 			get_type ( void );
 
-		int	get_health ( void ),
+		int
+			get_health ( void ),
 			get_strength ( void ),
 			get_mass ( void );
 
 		/* these functions set the variables */
-		void	set_type ( object_t temp_type ),
+		void
+			set_type ( object_t temp_type ),
 			set_health ( int temp_health ),
 			set_strength ( int temp_strength ),
 			set_mass ( int temp_mass );

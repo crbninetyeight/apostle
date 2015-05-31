@@ -84,19 +84,13 @@ void	prompt_error ( const char* msg, bool interactive )
 	 * 	msg:		the message string to be displayed.
 	 * 	interactive:	wait for user input (true) or not (false).	*/
 
-	char	in;	/* single character input */
-
+	char	in;	// single character input
 
 	if ( !interactive ) {
-		/* print output to cerr as this may be suppressed */
-		std::cerr << "error: " << msg << '\n';
+		std::cerr << "error: " << msg << '\n';	// print output to cerr as this may be suppressed
 	} else {
-		/* print output to cout as the user will need to
-		 * see it to continue */
-		std::cout << "error: " << msg << '\n';
-		
-		/* now wait for input */
-		std::cin >> in;
+		std::cout << "error: " << msg << '\n';	// print output to cout as the user will need to see it to continue
+		std::cin  >> in;						// wait for input
 
 		/* there is no other code after this point as it is
 		 * not needed as of writing */
@@ -117,47 +111,36 @@ bool	handle_arguments ( int argc, char** argv )
 	for ( int count = 1; count <= argc-1 && cont; count++ ) {
 		switch ( identify_argument(argv[count]) ) {
 			case ARG_UNKNWN:
-				prompt_error ( "unknown argument", false );
-				/* break not needed as it will go to help */
+				prompt_error ("unknown argument", false);
+				// break not needed as it will go to help
 			case ARG_HELP:
 				cont	= false;
-				print_help_msg ( );
+				print_help_msg();
 				break;
 			default:
 				cont	= false;
-				prompt_error ( "unknown error", false );
+				prompt_error("unknown error", false);
 				break;
 		}
 	}
 
-	return	ret;
+	return ret;
 }
 
-int	main ( int argc, char** argv )
+int	main(int argc, char** argv)
 {
-	world	*w;	/* world (not yet initialized) */
+	int		input;	// input variable
+	world	*w;		// world (not yet initialized)
 
+	std::cout << '\n';				// output newline
+	print_init_msg();				// the message displayed at the beginning of apostle's execution
+	std::cout << '\n';				// output newline
+	handle_arguments(argc, argv);	// handle arguments given by the user
+	std::cin >> input;				// pause for input
+	w = new world(2500, 2500);		// initialize the world class
+	std::cout << '\n';				// ending newline (same purpose as the beginning one).
+	std::cin  >> input;				// pause for input
+	delete w;						// free memory used by the world object
 
-	/* beginning newline (to seperate the program output from the
-	 * rest of the terminal's).					*/
-	std::cout << '\n';
-
-	/* the message displayed at the beginning of apostle's execution */
-	print_init_msg ( );
-	std::cout << '\n';
-
-	/* handle arguments given by the user */
-	handle_arguments ( argc, argv );
-
-	/* initialize the world class */
-	w	= new world ( 25, 25 );
-
-	/* ending newline ( same purpose as the beginning one ). */
-	std::cout << '\n';
-
-	/* free memory used by the world object */
-	delete	w;
-
-
-	return	0;
+	return 0;	// return exit status
 }
