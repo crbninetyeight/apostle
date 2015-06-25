@@ -90,8 +90,7 @@ void prompt_error(const char* msg, bool interactive)
         std::cerr << "error: " << msg << '\n';  // print the output to cerr as this may be suppressed.
     } else {
         std::cout << "error: " << msg << '\n';  // print the output to cout as the user will need to see it to continue.
-
-        std::cin >> in; // now wait for user input
+        std::cin  >> in;                        // now wait for user input
 
         /* there is no other code after this point as it is not needed as of writing */
     }
