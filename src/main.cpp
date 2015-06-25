@@ -17,8 +17,8 @@
 
 /* argument identifiers */
 enum argid {
-    ARG_HELP    = 0,    /* help argument */
-    ARG_UNKNOWN         /* an unknown argument */
+    ARG_HELP    = 0,    // help argument
+    ARG_UNKNOWN         // an unknown argument
 };
 
 /* print the init message */
@@ -69,7 +69,7 @@ argid identify_argument(char* arg)
 
     argid retid = ARG_UNKNOWN;
 
-    if ( strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0 )
+    if (strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0)
         retid = ARG_HELP;
 
     return retid;
@@ -84,22 +84,16 @@ void prompt_error(const char* msg, bool interactive)
      * 	msg:		the message string to be displayed.
      * 	interactive:	wait for user input (true) or not (false).	*/
 
-    char in;    /* single character input */
-
+    char in;    // single character input
 
     if ( !interactive ) {
-        /* print output to cerr as this may be suppressed */
-        std::cerr << "error: " << msg << '\n';
+        std::cerr << "error: " << msg << '\n';  // print the output to cerr as this may be suppressed.
     } else {
-        /* print output to cout as the user will need to
-         * see it to continue */
-        std::cout << "error: " << msg << '\n';
+        std::cout << "error: " << msg << '\n';  // print the output to cout as the user will need to see it to continue.
 
-        /* now wait for input */
-        std::cin >> in;
+        std::cin >> in; // now wait for user input
 
-        /* there is no other code after this point as it is
-         * not needed as of writing */
+        /* there is no other code after this point as it is not needed as of writing */
     }
 }
 
@@ -118,7 +112,7 @@ bool handle_arguments(int argc, char** argv)
         switch ( identify_argument(argv[count]) ) {
         case ARG_UNKNOWN:
             prompt_error("unknown argument", false);
-        /* break not needed as it will go to help */
+            /* break not needed as it will go to help */
         case ARG_HELP:
             cont = false;
             print_help_msg();
@@ -135,29 +129,11 @@ bool handle_arguments(int argc, char** argv)
 
 int	main(int argc, char** argv)
 {
-    world *w;   /* world (not yet initialized) */
-
-
-    /* beginning newline (to seperate the program output from the
-     * rest of the terminal's).					*/
-    std::cout << '\n';
-
-    /* the message displayed at the beginning of apostle's execution */
-    print_init_msg();
-    std::cout << '\n';
-
-    /* handle arguments given by the user */
-    handle_arguments(argc, argv);
-
-    /* initialize the world class */
-    w = new world(25, 25);
-
-    /* ending newline ( same purpose as the beginning one ). */
-    std::cout << '\n';
-
-    /* free memory used by the world object */
-    delete w;
-
+    std::cout << '\n';              // beginning newline to seperate apostle's output from the rest of the terminal's.
+    print_init_msg();               // the message displayed at the beginning of apostle's execution.
+    std::cout << '\n';              // ^.
+    handle_arguments(argc, argv);   // handle arguments given by the user.
+    std::cout << '\n';              // ending newline (same purpose as the beginning one).
 
     return 0;
 }
