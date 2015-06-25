@@ -133,7 +133,7 @@ bool handle_arguments ( int argc, char** argv )
     return ret;
 }
 
-int	main ( int argc, char** argv )
+int	main(int argc, char** argv)
 {
     world *w;   /* world (not yet initialized) */
 
