@@ -96,7 +96,7 @@ void prompt_error(const char* msg, bool interactive)
     }
 }
 
-bool handle_arguments(int argc, char** argv)
+bool handle_arguments(int argc, char** argv, bool *interactive)
 {
     /* handle_arguments: handles arguments
      *
@@ -115,6 +115,7 @@ bool handle_arguments(int argc, char** argv)
         case ARG_HELP:
             cont = false;
             print_help_msg();
+            *interactive = false;
             break;
         default:
             cont = false;
@@ -126,13 +127,23 @@ bool handle_arguments(int argc, char** argv)
     return ret;
 }
 
+void doinput(std::string *input)
+{
+    std::cout << "?> ";
+    std::cin  >> *input;
+}
+
 int	main(int argc, char** argv)
 {
-    std::cout << '\n';              // beginning newline to seperate apostle's output from the rest of the terminal's.
-    print_init_msg();               // the message displayed at the beginning of apostle's execution.
-    std::cout << '\n';              // ^.
-    handle_arguments(argc, argv);   // handle arguments given by the user.
-    std::cout << '\n';              // ending newline (same purpose as the beginning one).
+    std::string input;          // input string.
+    bool interactive = true;    // the session will be interactive unless stated otherwise.
+
+    std::cout << '\n';                          // beginning newline to seperate apostle's output.
+    print_init_msg();                           // the message displayed at the beginning of apostle's execution.
+    std::cout << '\n';                          // ^.
+    handle_arguments(argc, argv, &interactive);  // handle arguments given by the user.
+    if (interactive) doinput(&input);
+    std::cout << '\n';                          // ending newline (same purpose as the beginning one).
 
     return 0;
 }
