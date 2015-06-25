@@ -16,148 +16,148 @@
 #include "world.hpp"
 
 /* argument identifiers */
-enum	argid {
-	ARG_HELP	= 0,		/* help argument */
-	ARG_UNKNWN			/* an unknown argument */
+enum argid {
+    ARG_HELP    = 0,    /* help argument */
+    ARG_UNKNOWN         /* an unknown argument */
 };
 
 /* print the init message */
-void	print_init_msg ( )
+void print_init_msg ( )
 {
-	/* the message displayed when starting apostle
-	 *
-	 * note: messages must not be terminated with
-	 * a newline escape character '\n'.		*/
-	char	*msg_init =
-			(char *)
-			" APOSTLE: a post-apocalyptic roguelike\n"
-			" by Christian Byrne <christianbyrne2012@gmail.com>\n"
-			"                    <github.com/jenerick>\n" 
-			"\n"
-			" DISCLAIMER:\n"
-			" This   program  is  not  under  any  warranty.\n"
-			" Any unfortunate losses of data or functionality\n"
-			" are not protected from the user. You have been\n"
-			" warned.";
+    /* the message displayed when starting apostle
+     *
+     * note: messages must not be terminated with
+     * a newline escape character '\n'.		*/
+    char *msg_init =
+        (char *)
+        " APOSTLE: a post-apocalyptic roguelike\n"
+        " by Christian Byrne <christianbyrne2012@gmail.com>\n"
+        "                    <github.com/jenerick>\n"
+        "\n"
+        " DISCLAIMER:\n"
+        " This   program  is  not  under  any  warranty.\n"
+        " Any unfortunate losses of data or functionality\n"
+        " are not protected from the user. You have been\n"
+        " warned.";
 
-	std::cout << msg_init << '\n';
+    std::cout << msg_init << '\n';
 }
 
 /* print the help message and a short description */
-void	print_help_msg ( )
+void print_help_msg ( )
 {
-	/* message that describes usage information */
-	char	*msg_help =
-			(char *)
-			" USAGE:\n"
-			"   apostle [options]\n"
-			"\n"
-			" OPTIONS:\n"
-			"   -h, --help:\n"
-			"         display this message.";
+    /* message that describes usage information */
+    char *msg_help =
+        (char *)
+        " USAGE:\n"
+        "   apostle [options]\n"
+        "\n"
+        " OPTIONS:\n"
+        "   -h, --help:\n"
+        "         display this message.";
 
-	std::cout << msg_help << '\n';
+    std::cout << msg_help << '\n';
 }
 
-argid	identify_argument ( char* arg )
+argid identify_argument ( char* arg )
 {
-	/* identify_argument: identifies the given argument
-	 *
-	 * return value:
-	 * 	integer value of the associated argument.
-	 */
+    /* identify_argument: identifies the given argument
+     *
+     * return value:
+     * 	integer value of the associated argument.
+     */
 
-	argid	retid = ARG_UNKNWN;
+    argid retid = ARG_UNKNOWN;
 
-	if ( strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0 )
-		retid	= ARG_HELP;
+    if ( strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0 )
+        retid	= ARG_HELP;
 
-	return	retid;
+    return retid;
 }
 
-void	prompt_error ( const char* msg, bool interactive )
+void prompt_error ( const char* msg, bool interactive )
 {
-	/* prompt the user an error message and (optionally) decide whether
-	 * to continue or not.
-	 *
-	 * arguments:
-	 * 	msg:		the message string to be displayed.
-	 * 	interactive:	wait for user input (true) or not (false).	*/
+    /* prompt the user an error message and (optionally) decide whether
+     * to continue or not.
+     *
+     * arguments:
+     * 	msg:		the message string to be displayed.
+     * 	interactive:	wait for user input (true) or not (false).	*/
 
-	char	in;	/* single character input */
+    char in;    /* single character input */
 
 
-	if ( !interactive ) {
-		/* print output to cerr as this may be suppressed */
-		std::cerr << "error: " << msg << '\n';
-	} else {
-		/* print output to cout as the user will need to
-		 * see it to continue */
-		std::cout << "error: " << msg << '\n';
-		
-		/* now wait for input */
-		std::cin >> in;
+    if ( !interactive ) {
+        /* print output to cerr as this may be suppressed */
+        std::cerr << "error: " << msg << '\n';
+    } else {
+        /* print output to cout as the user will need to
+         * see it to continue */
+        std::cout << "error: " << msg << '\n';
 
-		/* there is no other code after this point as it is
-		 * not needed as of writing */
-	}
+        /* now wait for input */
+        std::cin >> in;
+
+        /* there is no other code after this point as it is
+         * not needed as of writing */
+    }
 }
 
-bool	handle_arguments ( int argc, char** argv )
+bool handle_arguments ( int argc, char** argv )
 {
-	/* handle_arguments: handles arguments
-	 * 
-	 * return value:
-	 * 	true:	handled arguments without error.
-	 * 	false:	error occured while handling arguments.
-	 */
+    /* handle_arguments: handles arguments
+     *
+     * return value:
+     * 	true:	handled arguments without error.
+     * 	false:	error occured while handling arguments.
+     */
 
-	bool	cont = true, ret = false;
+    bool cont = true, ret = false;
 
-	for ( int count = 1; count <= argc-1 && cont; count++ ) {
-		switch ( identify_argument(argv[count]) ) {
-			case ARG_UNKNWN:
-				prompt_error ( "unknown argument", false );
-				/* break not needed as it will go to help */
-			case ARG_HELP:
-				cont	= false;
-				print_help_msg ( );
-				break;
-			default:
-				cont	= false;
-				prompt_error ( "unknown error", false );
-				break;
-		}
-	}
+    for ( int count = 1; count <= argc-1 && cont; count++ ) {
+        switch ( identify_argument(argv[count]) ) {
+        case ARG_UNKNOWN:
+            prompt_error ( "unknown argument", false );
+        /* break not needed as it will go to help */
+        case ARG_HELP:
+            cont = false;
+            print_help_msg ( );
+            break;
+        default:
+            cont = false;
+            prompt_error ( "unknown error", false );
+            break;
+        }
+    }
 
-	return	ret;
+    return ret;
 }
 
 int	main ( int argc, char** argv )
 {
-	world	*w;	/* world (not yet initialized) */
+    world *w;   /* world (not yet initialized) */
 
 
-	/* beginning newline (to seperate the program output from the
-	 * rest of the terminal's).					*/
-	std::cout << '\n';
+    /* beginning newline (to seperate the program output from the
+     * rest of the terminal's).					*/
+    std::cout << '\n';
 
-	/* the message displayed at the beginning of apostle's execution */
-	print_init_msg ( );
-	std::cout << '\n';
+    /* the message displayed at the beginning of apostle's execution */
+    print_init_msg ( );
+    std::cout << '\n';
 
-	/* handle arguments given by the user */
-	handle_arguments ( argc, argv );
+    /* handle arguments given by the user */
+    handle_arguments ( argc, argv );
 
-	/* initialize the world class */
-	w	= new world ( 25, 25 );
+    /* initialize the world class */
+    w = new world ( 25, 25 );
 
-	/* ending newline ( same purpose as the beginning one ). */
-	std::cout << '\n';
+    /* ending newline ( same purpose as the beginning one ). */
+    std::cout << '\n';
 
-	/* free memory used by the world object */
-	delete	w;
+    /* free memory used by the world object */
+    delete w;
 
 
-	return	0;
+    return 0;
 }
