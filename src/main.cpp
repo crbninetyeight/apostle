@@ -141,8 +141,8 @@ int	main(int argc, char** argv)
     std::cout << '\n';                          // beginning newline to seperate apostle's output.
     print_init_msg();                           // the message displayed at the beginning of apostle's execution.
     std::cout << '\n';                          // ^.
-    handle_arguments(argc, argv, &interactive);  // handle arguments given by the user.
-    if (interactive) doinput(&input);
+    handle_arguments(argc, argv, &interactive); // handle arguments given by the user.
+    if (interactive) doinput(&input);           // if interactive, do input.
     std::cout << '\n';                          // ending newline (same purpose as the beginning one).
 
     return 0;
