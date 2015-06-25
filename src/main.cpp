@@ -22,7 +22,7 @@ enum argid {
 };
 
 /* print the init message */
-void print_init_msg ( )
+void print_init_msg()
 {
     /* the message displayed when starting apostle
      *
@@ -44,7 +44,7 @@ void print_init_msg ( )
 }
 
 /* print the help message and a short description */
-void print_help_msg ( )
+void print_help_msg()
 {
     /* message that describes usage information */
     char *msg_help =
@@ -59,7 +59,7 @@ void print_help_msg ( )
     std::cout << msg_help << '\n';
 }
 
-argid identify_argument ( char* arg )
+argid identify_argument(char* arg)
 {
     /* identify_argument: identifies the given argument
      *
@@ -70,12 +70,12 @@ argid identify_argument ( char* arg )
     argid retid = ARG_UNKNOWN;
 
     if ( strcmp(arg, "-h") == 0 || strcmp(arg,"--help") == 0 )
-        retid	= ARG_HELP;
+        retid = ARG_HELP;
 
     return retid;
 }
 
-void prompt_error ( const char* msg, bool interactive )
+void prompt_error(const char* msg, bool interactive)
 {
     /* prompt the user an error message and (optionally) decide whether
      * to continue or not.
@@ -103,7 +103,7 @@ void prompt_error ( const char* msg, bool interactive )
     }
 }
 
-bool handle_arguments ( int argc, char** argv )
+bool handle_arguments(int argc, char** argv)
 {
     /* handle_arguments: handles arguments
      *
@@ -117,15 +117,15 @@ bool handle_arguments ( int argc, char** argv )
     for ( int count = 1; count <= argc-1 && cont; count++ ) {
         switch ( identify_argument(argv[count]) ) {
         case ARG_UNKNOWN:
-            prompt_error ( "unknown argument", false );
+            prompt_error("unknown argument", false);
         /* break not needed as it will go to help */
         case ARG_HELP:
             cont = false;
-            print_help_msg ( );
+            print_help_msg();
             break;
         default:
             cont = false;
-            prompt_error ( "unknown error", false );
+            prompt_error("unknown error", false);
             break;
         }
     }
@@ -143,14 +143,14 @@ int	main(int argc, char** argv)
     std::cout << '\n';
 
     /* the message displayed at the beginning of apostle's execution */
-    print_init_msg ( );
+    print_init_msg();
     std::cout << '\n';
 
     /* handle arguments given by the user */
-    handle_arguments ( argc, argv );
+    handle_arguments(argc, argv);
 
     /* initialize the world class */
-    w = new world ( 25, 25 );
+    w = new world(25, 25);
 
     /* ending newline ( same purpose as the beginning one ). */
     std::cout << '\n';
