@@ -1,13 +1,13 @@
 # APOSTLE makefile
 
 # directories (change as desired)
-dirsrc	= src/
-dirobj	= obj/
-dirbin	= bin/
+dirsrc	= src
+dirobj	= obj
+dirbin	= bin
 
 # required objects (append as needed)
 deps	= main world objects
-objs	= $(addprefix $(dirobj), $(addsuffix .o, $(deps)))
+objs	= $(addprefix $(dirobj)/, $(addsuffix .o, $(deps)))
 
 # build variables:
 ##	build options
@@ -17,24 +17,24 @@ opts	= -march=native -Wall -O2
 ##	name of the executable
 exe	= apostle
 ##	target location of the executable
-target	= $(dirbin)$(exe)
+target	= $(dirbin)/$(exe)
 
 all:		$(target)
 
 $(target):	$(dirsrc) $(dirobj) $(dirbin) $(objs)
 	g++ -o $@ $(objs)
 
-$(dirobj)%.o:	$(dirsrc)%.cpp
+$(dirobj)/%.o:	$(dirsrc)/%.cpp
 	g++ -o $@ $(opts) -c $<
 
 $(dirsrc):
 	echo "error: src directory can not be created"
 
 $(dirobj):
-	mkdir -p $(dirobj)
+	mkdir $(dirobj)
 
 $(dirbin):
-	mkdir -p $(dirbin)
+	mkdir $(dirbin)
 
 clean:
-	rm -f $(target) $(dirobj)*.o
+	rm $(target) $(dirobj)*.o

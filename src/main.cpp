@@ -41,6 +41,8 @@ void print_init_msg()
         " warned.";
 
     std::cout << msg_init << '\n';
+
+    delete msg_init; // for safe measure
 }
 
 /* print the help message and a short description */
@@ -57,6 +59,8 @@ void print_help_msg()
         "         display this message.";
 
     std::cout << msg_help << '\n';
+
+    delete msg_help; // for safe measure
 }
 
 argid identify_argument(char* arg)
@@ -110,7 +114,7 @@ bool handle_arguments(int argc, char** argv, bool *interactive)
     for ( int count = 1; count <= argc-1 && cont; count++ ) {
         switch ( identify_argument(argv[count]) ) {
         case ARG_UNKNOWN:
-            prompt_error("unknown argument", false);
+            prompt_error("unknown argument\n", false);
             /* break not needed as it will go to help */
         case ARG_HELP:
             cont = false;
@@ -133,7 +137,7 @@ void doinput(std::string *input)
     std::cin  >> *input;
 }
 
-int	main(int argc, char** argv)
+int main(int argc, char** argv)
 {
     std::string input;          // input string.
     bool interactive = true;    // the session will be interactive unless stated otherwise.
