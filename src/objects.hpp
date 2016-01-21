@@ -1,51 +1,50 @@
 #ifndef	APO_OBJECTS_HPP
 #define	APO_OBJECTS_HPP
 
-/*	objects.hpp: header file for apostle's objects */
+/*	Objects.hpp: header file for apostle's Objects */
 
-/* enumerator that defines object types */
-enum object_t {
+/* enumerator that defines Object types */
+enum ObjectType {
     /* entities */
     OBJECT_LIVING,      /* living entities (actors, npcs, zombies...) */
     /* openables */
-    OBJECT_DOOR,        /* objects that can be opened to be passed through (doors, windows...) */
-    OBJECT_CONTAINER,   /* objects that can contain other objects (chests, safes...) */
+    OBJECT_DOOR,        /* Objects that can be opened to be passed through (doors, windows...) */
+    OBJECT_CONTAINER,   /* Objects that can contain other Objects (chests, safes...) */
     /* consumables */
-    OBJECT_FOOD,        /* objects that can be consumed for health and hunger (edibles, soups...) */
-    OBJECT_WATER,       /* objects that can be consumed for health and thirst (water, soda...) */
-    OBJECT_MEDICINE,    /* objects that can be consumed for health and sickness (pills, vaccines...) */
+    OBJECT_FOOD,        /* Objects that can be consumed for health and hunger (edibles, soups...) */
+    OBJECT_WATER,       /* Objects that can be consumed for health and thirst (water, soda...) */
+    OBJECT_MEDICINE,    /* Objects that can be consumed for health and sickness (pills, vaccines...) */
     /* usables */
-    OBJECT_WEAPON,      /* objects that can be used to cause damage (guns, bats, knives...) */
-    OBJECT_USABLE,      /* objects that can be used on other objects (keys, matches...) */
+    OBJECT_WEAPON,      /* Objects that can be used to cause damage (guns, bats, knives...) */
+    OBJECT_USABLE,      /* Objects that can be used on other Objects (keys, matches...) */
     /* other */
-    OBJECT_MISC,        /* objects that have little value (decorations, blood, rocks...) */
-    OBJECT_UNKNWN       /* an unknown object (usually in error) */
+    OBJECT_MISC,        /* Objects that have little value (decorations, blood, rocks...) */
+    OBJECT_UNKNWN       /* an unknown Object (usually in error) */
 };
 
-/* main object class */
-class object
+/* main Object class */
+class Object
 {
 private:
-    object_t
-    type;           /* the object's type */
+    ObjectType type;    /* the Object's type */
 
-    int  health;     /* condition of the object */
-    int  strength;   /* object resistance */
-    int  mass;       /* combined mass of the object */
+    int  health;        /* condition of the Object */
+    int  strength;      /* Object resistance */
+    int  mass;          /* combined mass of the Object */
+
 public:
     /* these functions return the variables above */
-    object_t
-    get_type            (void );
+    ObjectType get_type();
 
-    int  get_health     (void );
-    int  get_strength   (void );
-    int  get_mass       (void );
+    int  get_health();
+    int  get_strength();
+    int  get_mass();
 
     /* these functions set the variables */
-    void set_type       (object_t temp_type );
-    void set_health     (int temp_health    );
-    void set_strength   (int temp_strength  );
-    void set_mass       (int temp_mass      );
+    void set_type(ObjectType temp_type);
+    void set_health(int temp_health);
+    void set_strength(int temp_strength);
+    void set_mass(int temp_mass);
 };
 
 #endif	// APO_OBJECTS_HPP_

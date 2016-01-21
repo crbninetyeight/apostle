@@ -2,19 +2,19 @@
 
 #include "world.hpp"
 
-tset2::tset2 ( int x, int y )
+TileSet2::TileSet2 ( int x, int y )
 {
-    /* build a tileset given the parameters */
-    this->set = new tile*[y];
+    /* build a Tileset given the parameters */
+    this->set = new Tile*[y];
     for ( int i = 0; i < y; i++ ) {
-        this->set[i] = new tile[x];
+        this->set[i] = new Tile[x];
     }
 
     /* add dimensional contexts to the class */
     this->dime.width    = x;
     this->dime.height   = y;
 
-    /* fill in all tiles of the set with blanks */
+    /* fill in all Tiles of the set with blanks */
     for ( int iy = 0; iy < this->dime.height; iy++ ) {
         for ( int ix = 0; ix < this->dime.width; ix++ ) {
             this->set[ix][iy].type          = TILE_BLANK;
@@ -24,7 +24,7 @@ tset2::tset2 ( int x, int y )
     }
 }
 
-tset2::~tset2 ( void )
+TileSet2::~TileSet2 ( void )
 {
     /* destructor of tset2 */
     for ( int i = 0; i < this->dime.height; i++ ) {
@@ -34,13 +34,13 @@ tset2::~tset2 ( void )
     delete[] this->set;
 }
 
-world::world ( int world_x, int world_y )
+World::World ( int world_x, int world_y )
 {
     /* world(): build the world */
-    this->set = new tset2 ( world_x, world_y );
+    this->set = new TileSet2 ( world_x, world_y );
 }
 
-world::~world ( void )
+World::~World ( void )
 {
     /* world destructor */
     delete this->set;

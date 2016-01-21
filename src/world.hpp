@@ -2,47 +2,48 @@
 #define	APO_WORLD_HPP__
 
 /* structure that contains dimension information */
-struct dime2 {
+struct Dimension2 {
     int width;
     int height;
 };
 
 /* structure that contains position information */
-struct pos2 {
+struct Position2 {
     int	x;
     int y;
 };
 
 /* enumerator that describes tile types */
-enum tile_t {
+enum TileType {
     TILE_BLANK
 };
 
 /* structure that describes tiles */
-struct tile {
-    tile_t  type;
-    pos2    location;
+struct Tile {
+    TileType    type;
+    Position2        location;
 };
 
 /* class that contains tilesets */
-class tset2
+class TileSet2
 {
 private:
-    tile    **set;  /* the set */
-    dime2   dime;   /* the dimensions of the set */
+    Tile        **set;  /* the set */
+    Dimension2   dime;  /* the dimensions of the set */
 public:
-    tset2   (int x, int y ); /* build a tileset given the parameters */
-    ~tset2  (void         );
+    TileSet2   (int x, int y);  /* build a tileset given the parameters */
+    ~TileSet2  (void        );
 };
 
-/* class that contains tilesets and other world information */
-class world
+/* class that contains tilesets and other World information */
+class World
 {
 private:
-    tset2   *set;   /* the set of tiles needed for world manipulation */
+    TileSet2   *set;   /* the set of tiles needed for World manipulation */
+
 public:
-    world   (int world_x, int world_y );    /* world constructor */
-    ~world  (void                     );    /* world  destructor */
+    World   (int World_x, int World_y);     /* World constructor */
+    ~World  (void                    );     /* World  destructor */
 };
 
 #endif	/* APO_WORLD_HPP__ */
