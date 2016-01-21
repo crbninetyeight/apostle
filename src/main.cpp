@@ -8,20 +8,20 @@
  *	    https://github.com/jenerick/apostle
  *	Feel free to make a pull request or something.			*/
 
-/* STANDARD libraries */
+// STANDARD libraries
 #include <iostream>
 #include <cstring>
 
-/* APOSTLE libraries */
+// APOSTLE libraries
 #include "world.hpp"
 
-/* argument identifiers */
+// argument identifiers
 enum argid {
     ARG_HELP    = 0,    // help argument
     ARG_UNKNOWN         // an unknown argument
 };
 
-/* print the init message */
+// print the init message
 void print_init_msg()
 {
     /* the message displayed when starting apostle
@@ -45,10 +45,10 @@ void print_init_msg()
     delete msg_init; // for safe measure
 }
 
-/* print the help message and a short description */
+// print the help message and a short description
 void print_help_msg()
 {
-    /* message that describes usage information */
+    // message that describes usage information
     char *msg_help =
         (char *)
         " USAGE:\n"
@@ -91,12 +91,13 @@ void prompt_error(const char* msg, bool interactive)
     char in;    // single character input
 
     if ( !interactive ) {
-        std::cerr << "error: " << msg << '\n';  // print the output to cerr as this may be suppressed.
+        // print the output to cerr as this may be suppressed.
+        std::cerr << "error: " << msg << '\n';
     } else {
-        std::cout << "error: " << msg << '\n';  // print the output to cout as the user will need to see it to continue.
-        std::cin  >> in;                        // now wait for user input
-
-        /* there is no other code after this point as it is not needed as of writing */
+        // print the output to cout as the user will need to see it to continue.
+        std::cout << "error: " << msg << '\n';
+        // now wait for user input
+        std::cin  >> in;
     }
 }
 
@@ -115,7 +116,7 @@ bool handle_arguments(int argc, char** argv, bool *interactive)
         switch ( identify_argument(argv[count]) ) {
         case ARG_UNKNOWN:
             prompt_error("unknown argument\n", false);
-            /* break not needed as it will go to help */
+            // break not needed as it will go to help
         case ARG_HELP:
             cont = false;
             print_help_msg();
@@ -140,14 +141,14 @@ void doinput(std::string *input)
 int main(int argc, char** argv)
 {
     std::string input;          // input string.
-    bool interactive = true;    // the session will be interactive unless stated otherwise.
+    bool interactive = true;    // the session will be interactive unless stated.
 
-    std::cout << '\n';                          // beginning newline to seperate apostle's output.
-    print_init_msg();                           // the message displayed at the beginning of apostle's execution.
-    std::cout << '\n';                          // ^.
-    handle_arguments(argc, argv, &interactive); // handle arguments given by the user.
-    if (interactive) doinput(&input);           // if interactive, do input.
-    std::cout << '\n';                          // ending newline (same purpose as the beginning one).
+    std::cout << '\n';  // beginning newline to seperate apostle's output.
+    print_init_msg();
+    std::cout << '\n';
+    handle_arguments(argc, argv, &interactive);
+    if (interactive) doinput(&input);
+    std::cout << '\n';
 
     return 0;
 }

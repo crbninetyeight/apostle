@@ -6,20 +6,20 @@
 /* enumerator that defines Object types */
 enum ObjectType {
     /* entities */
-    OBJECT_LIVING,      /* living entities (actors, npcs, zombies...) */
+    OBJECT_ENTITY,      /* living entities */
     /* openables */
-    OBJECT_DOOR,        /* Objects that can be opened to be passed through (doors, windows...) */
-    OBJECT_CONTAINER,   /* Objects that can contain other Objects (chests, safes...) */
+    OBJECT_DOOR,        /* Objects that can be opened to be passed through */
+    OBJECT_CONTAINER,   /* Objects that can contain other Objects*/
     /* consumables */
-    OBJECT_FOOD,        /* Objects that can be consumed for health and hunger (edibles, soups...) */
-    OBJECT_WATER,       /* Objects that can be consumed for health and thirst (water, soda...) */
-    OBJECT_MEDICINE,    /* Objects that can be consumed for health and sickness (pills, vaccines...) */
+    OBJECT_FOOD,        /* Objects that can be consumed for health and hunger */
+    OBJECT_WATER,       /* Objects that can be consumed for health and thirst */
+    OBJECT_MEDICINE,    /* Objects that can be consumed for health and sickness */
     /* usables */
-    OBJECT_WEAPON,      /* Objects that can be used to cause damage (guns, bats, knives...) */
-    OBJECT_USABLE,      /* Objects that can be used on other Objects (keys, matches...) */
+    OBJECT_WEAPON,      /* Objects that can be used to cause damage */
+    OBJECT_USABLE,      /* Objects that can be used on other Objects */
     /* other */
-    OBJECT_MISC,        /* Objects that have little value (decorations, blood, rocks...) */
-    OBJECT_UNKNWN       /* an unknown Object (usually in error) */
+    OBJECT_MISC,        /* Objects that have little value */
+    OBJECT_UNKNWN       /* an unknown Object */
 };
 
 /* main Object class */
