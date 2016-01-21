@@ -5,4 +5,10 @@
 *.o
 
 # binary
-apostle
+bin/apostle*
+
+# linked libraries
+*.dll
+
+# some other buffers
+*~
