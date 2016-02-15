@@ -14,21 +14,6 @@ ApoWindow::ApoWindow( const char* title )
     stupid = 0;
     SDL_Init( SDL_INIT_VIDEO );
 
-    red.r = 255;
-    red.g = 0;
-    red.b = 0;
-    red.a = 255;
-
-    green.r = 0;
-    green.g = 255;
-    green.b = 0;
-    green.a = 255;
-
-    blue.r = 0;
-    blue.g = 0;
-    blue.b = 255;
-    blue.a = 255;
-
     window = SDL_CreateWindow(
         title,
         undefined, undefined,
@@ -59,24 +44,24 @@ ApoWindow::~ApoWindow()
 void ApoWindow::clearWindow()
 {
     SDL_Rect rect;
-    rect.w = 16;
-    rect.h = 16;
+    rect.w = 8;
+    rect.h = 8;
 
-    WhiteNoise *red = new WhiteNoise( 40, 30, stupid+0 );
-    WhiteNoise *grn = new WhiteNoise( 40, 30, stupid+1 );
-    WhiteNoise *blu = new WhiteNoise( 40, 30, stupid+2 );
+    WhiteNoise *red = new WhiteNoise( 80, 60, stupid+0 );
+    WhiteNoise *grn = new WhiteNoise( 80, 60, stupid+1 );
+    WhiteNoise *blu = new WhiteNoise( 80, 60, stupid+2 );
 
     srand( stupid );
     SDL_FillRect( front, NULL, 0x00000000 );
-    for( int j = 0; j < 40; j++ ) {
-        for( int i = 0; i < 30; i++ ) {
+    for( int j = 0; j < 80; j++ ) {
+        for( int i = 0; i < 60; i++ ) {
             blockColor[j][i] = 255 << 24;
-            blockColor[j][i] |= static_cast<int>(grn->getValue(j, i)*255) << 0;
-            blockColor[j][i] |= static_cast<int>(blu->getValue(j, i)*255) << 8;
+            blockColor[j][i] |= static_cast<int>(blu->getValue(j, i)*255) << 0;
+            blockColor[j][i] |= static_cast<int>(grn->getValue(j, i)*255) << 8;
             blockColor[j][i] |= static_cast<int>(red->getValue(j, i)*255) << 16;
 
-            rect.x = j*16;
-            rect.y = i*16;
+            rect.x = j*rect.w;
+            rect.y = i*rect.h;
             SDL_FillRect( front, &rect, blockColor[j][i]);
         }
     }

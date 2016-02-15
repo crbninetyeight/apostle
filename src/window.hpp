@@ -15,14 +15,10 @@ private:
     SDL_Surface *front;
     SDL_Event    event;
 
-    SDL_Color red;
-    SDL_Color blue;
-    SDL_Color green;
-
     int win_width;
     int win_height;
 
-    Uint32 blockColor[40][30];
+    Uint32 blockColor[80][60];
 
 public:
     /* constructor and destructor */
