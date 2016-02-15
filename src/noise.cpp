@@ -1,7 +1,7 @@
 #include "noise.hpp"
 #include <stdlib.h>
 
-WhiteNoise::WhiteNoise( int width, int height )
+WhiteNoise::WhiteNoise( int width, int height, int stupid )
 {
     this->noise = new float*[width];
     for( int i = 0; i < width; i++ ) {
@@ -14,7 +14,7 @@ WhiteNoise::WhiteNoise( int width, int height )
     for( int j = 0; j < height; j++ ) {
         for( int i = 0; i < width; i++ ) {
             srand( 0 );
-            this->noise[i][j] = static_cast<float>(i+1)/static_cast<float>(j+1);
+            this->noise[i][j] = static_cast<float>(i+stupid)/static_cast<float>(j+1);
         }
     }
 }

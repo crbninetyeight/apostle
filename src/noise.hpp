@@ -9,7 +9,7 @@ private:
     int height;
 
 public:
-    WhiteNoise( int width, int height );
+    WhiteNoise( int width, int height, int stupid );
 
     float getValue( int x, int y );
 

@@ -62,7 +62,7 @@ void ApoWindow::clearWindow()
     rect.w = 16;
     rect.h = 16;
 
-    WhiteNoise *wn = new WhiteNoise( 40, 30 );
+    WhiteNoise *wn = new WhiteNoise( 40, 30, stupid );
 
     srand( stupid );
     SDL_FillRect( front, NULL, 0x00000000 );
