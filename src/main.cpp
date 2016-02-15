@@ -14,6 +14,7 @@
 
 // APOSTLE libraries
 #include "world.hpp"
+#include "window.hpp"
 
 // argument identifiers
 enum argid {
@@ -140,14 +141,29 @@ void doinput(std::string *input)
 
 int main(int argc, char** argv)
 {
-    std::string input;          // input string.
-    bool interactive = true;    // the session will be interactive unless stated.
+    ApoWindow *window;
+    std::string input;  // input string.
+    bool interactive = false;
 
     std::cout << '\n';  // beginning newline to seperate apostle's output.
     print_init_msg();
     std::cout << '\n';
     handle_arguments(argc, argv, &interactive);
     if (interactive) doinput(&input);
+    window = new ApoWindow( "apostleSDL" );
+    while( window != NULL ) {
+        while( window->isEvent() ) {
+            switch( window->getEvent().type ) {
+                case SDL_QUIT:
+                delete window;
+                window = NULL;
+                break;
+            }
+        }
+        window->clearWindow();
+        window->updateWindow();
+        SDL_Delay( 15 );
+    }
     std::cout << '\n';
 
     return 0;
