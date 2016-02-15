@@ -5,12 +5,14 @@ set (SOURCES
      src/main.cpp
      src/objects.cpp
      src/world.cpp
-     src/window.cpp)
+     src/window.cpp
+     src/noise.cpp)
 
 set (HEADERS
      src/objects.hpp
      src/world.hpp
-     src/window.hpp)
+     src/window.hpp
+     src/noise.hpp)
 
 add_executable (apostle ${SOURCES} ${HEADERS})
 find_package (SDL2 REQUIRED)

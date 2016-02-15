@@ -1,5 +1,6 @@
 #include <iostream>
 #include "window.hpp"
+#include "noise.hpp"
 #include <stdlib.h>
 
 #define RED 0xFFFF0000
@@ -58,10 +59,10 @@ ApoWindow::~ApoWindow()
 void ApoWindow::clearWindow()
 {
     SDL_Rect rect;
-    rect.x = 0;
-    rect.y = 17;
-    rect.w = 32;
-    rect.h = 32;
+    rect.w = 16;
+    rect.h = 16;
+
+    WhiteNoise *wn = new WhiteNoise( 40, 30 );
 
     srand( stupid );
     SDL_FillRect( front, NULL, 0x00000000 );
@@ -70,13 +71,11 @@ void ApoWindow::clearWindow()
             blockColor[j][i] = 255;
             for( int shift = 0; shift <= 3; shift++ ) {
                 blockColor[j][i] = blockColor[j][i] << 8;
-                blockColor[j][i] = rand()+shift % 256;
+                blockColor[j][i] = static_cast <int> (wn->getValue(j, i)*255);
             }
 
             rect.x = j*16;
             rect.y = i*16;
-            rect.w = 16;
-            rect.h = 16;
             SDL_FillRect( front, &rect, blockColor[j][i]);
         }
     }
