@@ -62,17 +62,18 @@ void ApoWindow::clearWindow()
     rect.w = 16;
     rect.h = 16;
 
-    WhiteNoise *wn = new WhiteNoise( 40, 30 );
+    WhiteNoise *red = new WhiteNoise( 40, 30, stupid+0 );
+    WhiteNoise *grn = new WhiteNoise( 40, 30, stupid+1 );
+    WhiteNoise *blu = new WhiteNoise( 40, 30, stupid+2 );
 
     srand( stupid );
     SDL_FillRect( front, NULL, 0x00000000 );
     for( int j = 0; j < 40; j++ ) {
         for( int i = 0; i < 30; i++ ) {
-            blockColor[j][i] = 255;
-            for( int shift = 0; shift <= 3; shift++ ) {
-                blockColor[j][i] = blockColor[j][i] << 8;
-                blockColor[j][i] = static_cast <int> (wn->getValue(j, i)*255);
-            }
+            blockColor[j][i] = 255 << 24;
+            blockColor[j][i] |= static_cast<int>(grn->getValue(j, i)*255) << 0;
+            blockColor[j][i] |= static_cast<int>(blu->getValue(j, i)*255) << 8;
+            blockColor[j][i] |= static_cast<int>(red->getValue(j, i)*255) << 16;
 
             rect.x = j*16;
             rect.y = i*16;
@@ -80,6 +81,9 @@ void ApoWindow::clearWindow()
         }
     }
 
+    delete red;
+    delete grn;
+    delete blu;
     stupid++;
 }
 

@@ -162,7 +162,7 @@ int main(int argc, char** argv)
         }
         window->clearWindow();
         window->updateWindow();
-        SDL_Delay( 15 );
+        SDL_Delay( 50 );
     }
     std::cout << '\n';
 

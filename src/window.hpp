@@ -13,7 +13,6 @@ private:
     int stupid;
     SDL_Window  *window;
     SDL_Surface *front;
-    SDL_Surface *back;
     SDL_Event    event;
 
     SDL_Color red;
