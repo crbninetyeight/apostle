@@ -13,13 +13,7 @@
 
 ApoWindow::ApoWindow( const char* title, int width, int height )
 {
-    stupid = 0;
     SDL_Init( SDL_INIT_VIDEO );
-
-    this->blockColor = new Uint32*[width/TILE_SIZE];
-    for( int i = 0; i < width/TILE_SIZE; i++ ) {
-        this->blockColor[i] = new Uint32[height/TILE_SIZE];
-    }
 
     window = SDL_CreateWindow(
         title,
@@ -33,19 +27,8 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
             << SDL_GetError();
     }
 
-    SDL_GetWindowSize( window, &win_width, &win_height );
+    SDL_GetWindowSize( window, &width, &height );
     front   = SDL_GetWindowSurface( window );
-
-    map = SDL_CreateRGBSurface(
-        0,
-        width-(TILE_SIZE*6),
-        height-(TILE_SIZE),
-        24,
-        0x00FF0000,
-        0x0000FF00,
-        0x000000FF,
-        0xFF000000
-    );
 
     if( front == NULL ) {
         std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
@@ -54,12 +37,6 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
 
 ApoWindow::~ApoWindow()
 {
-    for( int i = 0; i < this->win_width/TILE_SIZE; i++ ) {
-        delete[] this->blockColor[i];
-    }
-
-    delete[] this->blockColor;
-
     SDL_DestroyWindow( window );
     SDL_Quit();
 }

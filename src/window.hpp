@@ -10,20 +10,13 @@
 class ApoWindow
 {
 private:
-    int stupid;
     SDL_Window      *window;
 
     SDL_Surface *front;
-    SDL_Surface *map;
-    SDL_Surface *info;
-    SDL_Surface *status;
+    SDL_Event event;
 
-    SDL_Event    event;
-
-    int win_width;
-    int win_height;
-
-    Uint32 **blockColor;
+    int width;
+    int height;
 
 public:
     /* constructor and destructor */
