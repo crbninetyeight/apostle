@@ -150,7 +150,7 @@ int main(int argc, char** argv)
     std::cout << '\n';
     handle_arguments(argc, argv, &interactive);
     if (interactive) doinput(&input);
-    window = new ApoWindow( "apostleSDL" );
+    window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
     while( window != NULL ) {
         while( window->isEvent() ) {
             switch( window->getEvent().type ) {

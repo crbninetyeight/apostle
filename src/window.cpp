@@ -7,17 +7,24 @@
 #define GRN 0xFF00FF00
 #define BLU 0xFF0000FF
 
+#define TILE_SIZE 32
+
 #define undefined SDL_WINDOWPOS_UNDEFINED
 
-ApoWindow::ApoWindow( const char* title )
+ApoWindow::ApoWindow( const char* title, int width, int height )
 {
     stupid = 0;
     SDL_Init( SDL_INIT_VIDEO );
 
+    this->blockColor = new Uint32*[width/TILE_SIZE];
+    for( int i = 0; i < width/TILE_SIZE; i++ ) {
+        this->blockColor[i] = new Uint32[height/TILE_SIZE];
+    }
+
     window = SDL_CreateWindow(
         title,
         undefined, undefined,
-        640, 480,
+        width, height,
         0
     );
 
@@ -27,8 +34,18 @@ ApoWindow::ApoWindow( const char* title )
     }
 
     SDL_GetWindowSize( window, &win_width, &win_height );
+    front   = SDL_GetWindowSurface( window );
 
-    front = SDL_GetWindowSurface( window );
+    map = SDL_CreateRGBSurface(
+        0,
+        width-(TILE_SIZE*6),
+        height-(TILE_SIZE),
+        24,
+        0x00FF0000,
+        0x0000FF00,
+        0x000000FF,
+        0xFF000000
+    );
 
     if( front == NULL ) {
         std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
@@ -37,6 +54,12 @@ ApoWindow::ApoWindow( const char* title )
 
 ApoWindow::~ApoWindow()
 {
+    for( int i = 0; i < this->win_width/TILE_SIZE; i++ ) {
+        delete[] this->blockColor[i];
+    }
+
+    delete[] this->blockColor;
+
     SDL_DestroyWindow( window );
     SDL_Quit();
 }
@@ -44,8 +67,8 @@ ApoWindow::~ApoWindow()
 void ApoWindow::clearWindow()
 {
     SDL_Rect rect;
-    rect.w = 16;
-    rect.h = 16;
+    rect.w = TILE_SIZE;
+    rect.h = TILE_SIZE;
     int tile_width  = win_width/rect.w;
     int tile_height = win_height/rect.h;
 
@@ -68,6 +91,8 @@ void ApoWindow::clearWindow()
         }
     }
 
+    SDL_FillRect( map, &map->clip_rect, 0xFFa3FF00 );
+
     delete red;
     delete grn;
     delete blu;
@@ -76,6 +101,7 @@ void ApoWindow::clearWindow()
 
 void ApoWindow::updateWindow()
 {
+    SDL_BlitSurface( map, NULL, front, NULL );
     SDL_UpdateWindowSurface( window );
 }
 

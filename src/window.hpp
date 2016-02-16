@@ -11,18 +11,23 @@ class ApoWindow
 {
 private:
     int stupid;
-    SDL_Window  *window;
+    SDL_Window      *window;
+
     SDL_Surface *front;
+    SDL_Surface *map;
+    SDL_Surface *info;
+    SDL_Surface *status;
+
     SDL_Event    event;
 
     int win_width;
     int win_height;
 
-    Uint32 blockColor[80][60];
+    Uint32 **blockColor;
 
 public:
     /* constructor and destructor */
-     ApoWindow( const char* title );
+     ApoWindow( const char* title, int width, int height );
     ~ApoWindow();
 
     void clearWindow();
