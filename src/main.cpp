@@ -142,6 +142,8 @@ void doinput(std::string *input)
 int main(int argc, char** argv)
 {
     ApoWindow *window;
+    SDL_Event event;
+
     std::string input;  // input string.
     bool interactive = false;
 
@@ -150,20 +152,25 @@ int main(int argc, char** argv)
     std::cout << '\n';
     handle_arguments(argc, argv, &interactive);
     if (interactive) doinput(&input);
+
     window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
+
     while( window != NULL ) {
         while( window->isEvent() ) {
-            switch( window->getEvent().type ) {
+            event = window->getEvent();
+            switch( event.type ) {
                 case SDL_QUIT:
                 delete window;
                 window = NULL;
                 break;
             }
         }
+        
         window->clearWindow();
         window->updateWindow();
         SDL_Delay( 50 );
     }
+
     std::cout << '\n';
 
     return 0;
