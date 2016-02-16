@@ -66,42 +66,11 @@ ApoWindow::~ApoWindow()
 
 void ApoWindow::clearWindow()
 {
-    SDL_Rect rect;
-    rect.w = TILE_SIZE;
-    rect.h = TILE_SIZE;
-    int tile_width  = win_width/rect.w;
-    int tile_height = win_height/rect.h;
-
-    WhiteNoise *red = new WhiteNoise( tile_width, tile_height, stupid+0 );
-    WhiteNoise *grn = new WhiteNoise( tile_width, tile_height, stupid+1 );
-    WhiteNoise *blu = new WhiteNoise( tile_width, tile_height, stupid+2 );
-
-    srand( stupid );
     SDL_FillRect( front, NULL, 0x00000000 );
-    for( int j = 0; j < tile_width; j++ ) {
-        for( int i = 0; i < tile_height; i++ ) {
-            blockColor[j][i] = 255 << 24;
-            blockColor[j][i] |= static_cast<int>(blu->getValue(j, i)*255) << 0;
-            blockColor[j][i] |= static_cast<int>(grn->getValue(j, i)*255) << 8;
-            blockColor[j][i] |= static_cast<int>(red->getValue(j, i)*255) << 16;
-
-            rect.x = j*rect.w;
-            rect.y = i*rect.h;
-            SDL_FillRect( front, &rect, blockColor[j][i]);
-        }
-    }
-
-    SDL_FillRect( map, &map->clip_rect, 0xFFa3FF00 );
-
-    delete red;
-    delete grn;
-    delete blu;
-    stupid++;
 }
 
 void ApoWindow::updateWindow()
 {
-    SDL_BlitSurface( map, NULL, front, NULL );
     SDL_UpdateWindowSurface( window );
 }
 
