@@ -144,6 +144,19 @@ int main(int argc, char** argv)
     ApoWindow *window;
     SDL_Event event;
 
+    SDL_Rect tile;
+    SDL_Surface *worldMap = SDL_CreateRGBSurface(
+        0,
+        11*32, 11*32,
+        32,
+        0x00FF0000,
+        0x0000FF00,
+        0x000000FF,
+        0xFF000000
+    );
+
+    World *world;
+
     std::string input;  // input string.
     bool interactive = false;
 
@@ -154,6 +167,10 @@ int main(int argc, char** argv)
     if (interactive) doinput(&input);
 
     window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
+    world = new World( 17, 12 );
+
+    tile.w = 32;
+    tile.h = 32;
 
     while( window != NULL ) {
         while( window->isEvent() ) {
@@ -165,8 +182,20 @@ int main(int argc, char** argv)
                 break;
             }
         }
-        
+
+        Uint32 color = 0x00000000;
+        for( int i = 0; i < 11; i++ ) {
+            for( int j = 0; j < 11; j++ ) {
+                tile.x = tile.w*i;
+                tile.y = tile.h*j;
+                color |= 0xFF000000;
+                color |= 2*j*2*i << 8;
+                SDL_FillRect( worldMap, &tile, color );
+            }
+        }
+
         window->clearWindow();
+        window->drawSurface( worldMap );
         window->updateWindow();
         SDL_Delay( 50 );
     }

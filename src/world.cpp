@@ -5,9 +5,9 @@
 TileSet2::TileSet2( int x, int y )
 {
     // build a Tileset given the parameters
-    this->set = new Tile*[y];
-    for ( int i = 0; i < y; i++ ) {
-        this->set[i] = new Tile[x];
+    this->set = new Tile*[x];
+    for ( int i = 0; i < x; i++ ) {
+        this->set[i] = new Tile[y];
     }
 
     // add dimensional contexts to the class

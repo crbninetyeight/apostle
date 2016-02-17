@@ -22,7 +22,7 @@ enum ObjectType {
     OBJECT_UNKNWN       // an unknown Object
 };
 
-// main Object class 
+// main Object class
 class Object
 {
 private:

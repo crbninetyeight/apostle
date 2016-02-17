@@ -46,6 +46,11 @@ void ApoWindow::clearWindow()
     SDL_FillRect( front, NULL, 0x00000000 );
 }
 
+void ApoWindow::drawSurface( SDL_Surface *surface )
+{
+    SDL_BlitSurface( surface, NULL, front, NULL );
+}
+
 void ApoWindow::updateWindow()
 {
     SDL_UpdateWindowSurface( window );

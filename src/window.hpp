@@ -24,6 +24,7 @@ public:
     ~ApoWindow();
 
     void clearWindow();
+    void drawSurface( SDL_Surface *surface );
     void updateWindow();
 
     /* event checking and polling */
