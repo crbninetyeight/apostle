@@ -20,7 +20,7 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
         0
     );
 
-    if( window == NULL ) {
+    if ( window == NULL ) {
         std::cerr << "There was an error while creating the window.\n"
             << SDL_GetError();
     }
@@ -30,7 +30,7 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
 
     viewport = new Viewport( 11, 11, 32 );
 
-    if( front == NULL ) {
+    if ( front == NULL ) {
         std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
     }
 }
@@ -73,7 +73,7 @@ bool ApoWindow::isEvent()
 
 SDL_Event ApoWindow::getEvent()
 {
-    if( SDL_PollEvent(&event) != 1 ) {
+    if ( SDL_PollEvent(&event) != 1 ) {
         return event;
     } else {
         return event;

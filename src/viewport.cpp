@@ -4,17 +4,19 @@ Viewport::Viewport( int width, int height, int tileSize )
 {
     isAnimating = false;
 
-    this->width = width;
-    this->height = height;
+    // two more rows and columns for pixels outside the drawing
+    // surface.
+    this->width = width+2;
+    this->height = height+2;
 
-    clipX = width;
-    clipY = height;
+    clipX = this->width;
+    clipY = this->height;
 
     this->tileSize = tileSize;
 
     viewSurf = SDL_CreateRGBSurface(
         0,
-        width, height,
+        (this->width-2)*tileSize, (this->height-2)*tileSize,
         24,
         0x00FF0000,
         0x0000FF00,
@@ -23,8 +25,8 @@ Viewport::Viewport( int width, int height, int tileSize )
     );
 
     tileColor = new Uint32*[width];
-    for( int i = 0; i < width; i++ ) {
-        tileColor[i] = new Uint32[height];
+    for ( int i = 0; i < this->width; i++ ) {
+        tileColor[i] = new Uint32[this->height];
     }
 }
 
@@ -44,6 +46,7 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
     actor->getPosition( &x, &y );
 
+    // the exterior clip anchor.
     // where (0,0) is the top-left corner of the world space.
     clipX = x-((width-1)/2);
     clipY = y-((height-1)/2);
@@ -51,19 +54,19 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
     world->fixClip( &clipX, &clipY, width, height );
 
     Uint32 color = 0xFF000000;
-    for( int i = 0; i < width; i++ ) {
-        for( int j = 0; j < height; j++ ) {
+    for ( int i = 0; i < width; i++ ) {
+        for ( int j = 0; j < height; j++ ) {
             switch( world->getTileType(clipX+i, clipY+j) ) {
                 case TILE_ACTOR:
                 color = 0xFFFFFFFF;
                 break;
 
                 case TILE_DIRT:
-                color = 0xFFFFFF00;
+                color = 0xFFFF0000;
                 break;
 
                 case TILE_BLANK:
-                color = 0xFF000000;
+                color = 0xFF0000FF;
                 break;
             }
 
@@ -75,11 +78,11 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
     rect.w = tileSize;
     rect.h = tileSize;
 
-    for( int i = 0; i < width; i++ ) {
-        for( int j = 0; j < height; j++ ) {
-            rect.x = 0 + (i*rect.w);
-            rect.y = 0 + (j*rect.h);
-            SDL_FillRect( viewSurf, &rect, tileColor[i][j] );
+    for ( int i = 0; i < width-1; i++ ) {
+        for ( int j = 0; j < height-1; j++ ) {
+            rect.x = (i*rect.w);
+            rect.y = (j*rect.h);
+            SDL_FillRect( viewSurf, &rect, tileColor[i+1][j+1] );
         }
     }
 
@@ -88,8 +91,8 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
 void Viewport::clearSurface()
 {
-    for( int i = 0; i < width; i++ ) {
-        for( int j = 0; j < height; j++ ) {
+    for ( int i = 0; i < width; i++ ) {
+        for ( int j = 0; j < height; j++ ) {
             tileColor[i][j] = 0xFF000000;
         }
     }

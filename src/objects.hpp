@@ -44,6 +44,7 @@ public:
     int  getMass();
 
     void getPosition( entity_position *x, entity_position *y );
+    void setPosition( entity_position x, entity_position y );
 
     // these functions set the variables
     void setType(ObjectType tempType);

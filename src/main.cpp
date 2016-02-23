@@ -164,23 +164,50 @@ int main(int argc, char** argv)
     window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
     world = new World( 51, 51 );
     actor = new Actor();
+    actor->setPosition( 0, 0 );
 
     world->setActor( actor );
 
-    while( window != NULL ) {
-        while( window->isEvent() ) {
+    int actorX, actorY;
+    actor->getPosition( &actorX, &actorY );
+
+    while ( window != NULL ) {
+        while ( window->isEvent() ) {
             event = window->getEvent();
-            switch( event.type ) {
+            switch ( event.type ) {
                 case SDL_QUIT:
                 delete window;
                 window = NULL;
                 break;
+
+                case SDL_KEYDOWN:
+                switch ( event.key.keysym.sym ) {
+                    case SDLK_UP:
+                    actor->setPosition( actorX, actorY-1 );
+                    break;
+
+                    case SDLK_DOWN:
+                    actor->setPosition( actorX, actorY+1 );
+                    break;
+
+                    case SDLK_LEFT:
+                    actor->setPosition( actorX-1, actorY );
+                    break;
+
+                    case SDLK_RIGHT:
+                    actor->setPosition( actorX+1, actorY );
+                    break;
+                }
             }
         }
+
+        world->setActor( actor );
 
         window->clearWindow();
         window->drawViewport( actor, world );
         window->updateWindow();
+
+        actor->getPosition( &actorX, &actorY );
         SDL_Delay( 50 );
     }
 

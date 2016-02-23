@@ -22,8 +22,14 @@ int Object::getMass ( void )
 
 void Object::getPosition( entity_position *x, entity_position *y )
 {
-    x = &this->x;
-    y = &this->y;
+    *x = this->x;
+    *y = this->y;
+}
+
+void Object::setPosition( entity_position x, entity_position y )
+{
+    this->x = x;
+    this->y = y;
 }
 
 void Object::setType ( ObjectType tempType )

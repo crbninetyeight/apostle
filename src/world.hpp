@@ -49,8 +49,8 @@ public:
 class World
 {
 private:
-    bool actorSet;
-    int actorX, actorY;
+    int curActorX, curActorY,
+        lasActorX, lasActorY;
 
     Tileset2 *set;   // the set of tiles needed for World manipulation
 
@@ -59,7 +59,6 @@ public:
     ~World(void);                       // World  destructor
 
     void setActor( Actor *actor );
-    void setActor( int x, int y );
 
     // constrains boundaries of clips given if they exceed the borders
     // of the world.
