@@ -6,13 +6,19 @@ set (SOURCES
      src/objects.cpp
      src/world.cpp
      src/window.cpp
-     src/noise.cpp)
+     src/noise.cpp
+     src/tools.cpp
+     src/viewport.cpp)
 
 set (HEADERS
      src/objects.hpp
+     src/entity.hpp
+     src/actor.hpp
      src/world.hpp
      src/window.hpp
-     src/noise.hpp)
+     src/noise.hpp
+     src/tools.hpp
+     src/viewport.hpp)
 
 add_executable (apostle ${SOURCES} ${HEADERS})
 find_package (SDL2 REQUIRED)

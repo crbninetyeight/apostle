@@ -1,41 +1,47 @@
 #include "objects.hpp"
 
-ObjectType Object::get_type ( void )
+ObjectType Object::getType ( void )
 {
     return type;
 }
 
-int Object::get_health ( void )
+int Object::getHealth ( void )
 {
     return health;
 }
 
-int Object::get_strength ( void )
+int Object::getStrength ( void )
 {
     return strength;
 }
 
-int Object::get_mass ( void )
+int Object::getMass ( void )
 {
     return mass;
 }
 
-void Object::set_type ( ObjectType temp_type )
+void Object::getPosition( entity_position *x, entity_position *y )
 {
-    type = temp_type;
+    x = &this->x;
+    y = &this->y;
 }
 
-void Object::set_health ( int temp_health )
+void Object::setType ( ObjectType tempType )
 {
-    health = temp_health;
+    type = tempType;
 }
 
-void Object::set_strength ( int temp_strength )
+void Object::setHealth ( int tempHealth )
 {
-    strength = temp_strength;
+    health = tempHealth;
 }
 
-void Object::set_mass ( int temp_mass )
+void Object::setStrength ( int tempStrength )
 {
-    mass = temp_mass;
+    strength = tempStrength;
+}
+
+void Object::setMass ( int tempMass )
+{
+    mass = tempMass;
 }

@@ -13,8 +13,6 @@
 
 ApoWindow::ApoWindow( const char* title, int width, int height )
 {
-    SDL_Init( SDL_INIT_VIDEO );
-
     window = SDL_CreateWindow(
         title,
         undefined, undefined,
@@ -28,7 +26,9 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
     }
 
     SDL_GetWindowSize( window, &width, &height );
-    front   = SDL_GetWindowSurface( window );
+    front = SDL_GetWindowSurface( window );
+
+    viewport = new Viewport( 11, 11, 32 );
 
     if( front == NULL ) {
         std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
@@ -46,9 +46,19 @@ void ApoWindow::clearWindow()
     SDL_FillRect( front, NULL, 0x00000000 );
 }
 
+void ApoWindow::drawSurface()
+{
+
+}
+
 void ApoWindow::drawSurface( SDL_Surface *surface )
 {
     SDL_BlitSurface( surface, NULL, front, NULL );
+}
+
+void ApoWindow::drawViewport( Actor *actor, World *world )
+{
+    drawSurface( viewport->drawSurface(actor, world) );
 }
 
 void ApoWindow::updateWindow()

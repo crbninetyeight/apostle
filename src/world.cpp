@@ -2,7 +2,7 @@
 
 #include "world.hpp"
 
-TileSet2::TileSet2( int x, int y )
+Tileset2::Tileset2( int x, int y )
 {
     // build a Tileset given the parameters
     this->set = new Tile*[x];
@@ -24,7 +24,7 @@ TileSet2::TileSet2( int x, int y )
     }
 }
 
-TileSet2::~TileSet2( void )
+Tileset2::~Tileset2( void )
 {
     // destructor of tset2
     for ( int i = 0; i < this->dime.height; i++ ) {
@@ -34,14 +34,82 @@ TileSet2::~TileSet2( void )
     delete[] this->set;
 }
 
+void Tileset2::setTileType( int x, int y, TileType newType )
+{
+    if( x > -1 && x <= dime.width && y > -1 && y <= dime.height ) {
+        set[x][y].type = newType;
+    }
+}
+
+TileType Tileset2::getTileType( int x, int y )
+{
+    if( x > -1 && x <= dime.width && y > -1 && y <= dime.height ) {
+        return set[x][y].type;
+    }
+    else {
+        return TILE_BLANK;
+    }
+}
+
 World::World( int world_x, int world_y )
 {
     // world(): build the world
-    this->set = new TileSet2 ( world_x, world_y );
+    this->set = new Tileset2 ( world_x, world_y );
 }
 
 World::~World( void )
 {
     // world destructor
     delete this->set;
+}
+
+void World::setActor( Actor *actor )
+{
+    actorSet = true;
+    actor->getPosition( &actorX, &actorY );
+    setActor( actorX, actorY );
+}
+
+void World::setActor( int x, int y )
+{
+    if( actorSet ) {
+        set->setTileType( actorX, actorY, TILE_BLANK );
+
+        actorX = x;
+        actorY = y;
+
+        set->setTileType( actorX, actorY, TILE_ACTOR );
+    }
+}
+
+void World::fixClip( int *clipX, int *clipY, int width, int height )
+{
+    if( *clipX < 0 ) {
+        *clipX = 0;
+    }
+    else if( *clipX*width > set->getWidth() ) {
+        *clipX = set->getWidth();
+    }
+
+    if( *clipY < 0 ) {
+        *clipY = 0;
+    }
+    else if( *clipX*height > set->getHeight() ) {
+        *clipY = set->getHeight();
+    }
+}
+
+TileType World::getTileType( int x, int y )
+{
+    return set->getTileType( x, y );
+}
+
+int Tileset2::getWidth()
+{
+    return dime.width;
+}
+
+int Tileset2::getHeight()
+{
+    return dime.height;
 }

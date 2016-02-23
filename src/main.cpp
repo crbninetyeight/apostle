@@ -15,6 +15,9 @@
 // APOSTLE libraries
 #include "world.hpp"
 #include "window.hpp"
+#include "tools.hpp"
+
+using namespace Tools::Location;
 
 // argument identifiers
 enum argid {
@@ -144,17 +147,7 @@ int main(int argc, char** argv)
     ApoWindow *window;
     SDL_Event event;
 
-    SDL_Rect tile;
-    SDL_Surface *worldMap = SDL_CreateRGBSurface(
-        0,
-        11*32, 11*32,
-        32,
-        0x00FF0000,
-        0x0000FF00,
-        0x000000FF,
-        0xFF000000
-    );
-
+    Actor *actor;
     World *world;
 
     std::string input;  // input string.
@@ -166,11 +159,13 @@ int main(int argc, char** argv)
     handle_arguments(argc, argv, &interactive);
     if (interactive) doinput(&input);
 
-    window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
-    world = new World( 17, 12 );
+    SDL_Init( SDL_INIT_VIDEO );
 
-    tile.w = 32;
-    tile.h = 32;
+    window = new ApoWindow( "apostleSDL", 17*32, 12*32 );
+    world = new World( 51, 51 );
+    actor = new Actor();
+
+    world->setActor( actor );
 
     while( window != NULL ) {
         while( window->isEvent() ) {
@@ -183,22 +178,13 @@ int main(int argc, char** argv)
             }
         }
 
-        Uint32 color = 0x00000000;
-        for( int i = 0; i < 11; i++ ) {
-            for( int j = 0; j < 11; j++ ) {
-                tile.x = tile.w*i;
-                tile.y = tile.h*j;
-                color |= 0xFF000000;
-                color |= 2*j*2*i << 8;
-                SDL_FillRect( worldMap, &tile, color );
-            }
-        }
-
         window->clearWindow();
-        window->drawSurface( worldMap );
+        window->drawViewport( actor, world );
         window->updateWindow();
         SDL_Delay( 50 );
     }
+
+    delete world;
 
     std::cout << '\n';
 

@@ -1,6 +1,8 @@
 #ifndef	APO_OBJECTS_HPP
 #define	APO_OBJECTS_HPP
 
+typedef int entity_position;
+
 //	Objects.hpp: header file for apostle's Objects
 
 // enumerator that defines Object types
@@ -28,23 +30,26 @@ class Object
 private:
     ObjectType type;    // the Object's type
 
-    int  health;        // condition of the Object
-    int  strength;      // Object resistance
-    int  mass;          // combined mass of the Object
+    entity_position x, y;   // location of the Object
+    int  health;            // condition of the Object
+    int  strength;          // Object resistance
+    int  mass;              // combined mass of the Object
 
 public:
     // these functions return the variables above
-    ObjectType get_type();
+    ObjectType getType();
 
-    int  get_health();
-    int  get_strength();
-    int  get_mass();
+    int  getHealth();
+    int  getStrength();
+    int  getMass();
+
+    void getPosition( entity_position *x, entity_position *y );
 
     // these functions set the variables
-    void set_type(ObjectType temp_type);
-    void set_health(int temp_health);
-    void set_strength(int temp_strength);
-    void set_mass(int temp_mass);
+    void setType(ObjectType tempType);
+    void setHealth(int tempHealth);
+    void setStrength(int tempStrength);
+    void setMass(int tempMass);
 };
 
 #endif	// APO_OBJECTS_HPP_

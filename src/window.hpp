@@ -2,6 +2,7 @@
 #define APO_WINDOW_HPP__
 
 #include <SDL2/SDL.h>
+#include "viewport.hpp"
 
 /**
  * Window class:
@@ -10,9 +11,10 @@
 class ApoWindow
 {
 private:
-    SDL_Window      *window;
+    SDL_Window *window;
 
     SDL_Surface *front;
+    Viewport *viewport;
     SDL_Event event;
 
     int width;
@@ -24,7 +26,11 @@ public:
     ~ApoWindow();
 
     void clearWindow();
+
+    void drawSurface();
     void drawSurface( SDL_Surface *surface );
+    void drawViewport( Actor *actor, World *world );
+
     void updateWindow();
 
     /* event checking and polling */
