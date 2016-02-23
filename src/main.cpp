@@ -187,20 +187,40 @@ int main(int argc, char** argv)
                     window = NULL;
                     break;
 
+                    case SDLK_KP_8:
                     case SDLK_UP:
                     actor->setPosition( actorX, actorY-1 );
                     break;
 
+                    case SDLK_KP_2:
                     case SDLK_DOWN:
                     actor->setPosition( actorX, actorY+1 );
                     break;
 
+                    case SDLK_KP_4:
                     case SDLK_LEFT:
                     actor->setPosition( actorX-1, actorY );
                     break;
 
+                    case SDLK_KP_6:
                     case SDLK_RIGHT:
                     actor->setPosition( actorX+1, actorY );
+                    break;
+
+                    case SDLK_KP_7:
+                    actor->setPosition( actorX-1, actorY-1 );
+                    break;
+
+                    case SDLK_KP_9:
+                    actor->setPosition( actorX+1, actorY-1 );
+                    break;
+
+                    case SDLK_KP_3:
+                    actor->setPosition( actorX+1, actorY+1 );
+                    break;
+
+                    case SDLK_KP_1:
+                    actor->setPosition( actorX-1, actorY+1 );
                     break;
                 }
             }
