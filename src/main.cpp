@@ -182,6 +182,11 @@ int main(int argc, char** argv)
 
                 case SDL_KEYDOWN:
                 switch ( event.key.keysym.sym ) {
+                    case SDLK_ESCAPE:
+                    delete window;
+                    window = NULL;
+                    break;
+
                     case SDLK_UP:
                     actor->setPosition( actorX, actorY-1 );
                     break;
