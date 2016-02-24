@@ -9,8 +9,11 @@ class Viewport
 {
 private:
     bool isAnimating;
+    bool isClipSet;
+    
     int width, height;
-    int clipX, clipY;
+    int curClipX, curClipY;
+    int lasClipX, lasClipY;
     int tileSize;
 
     SDL_Surface *viewSurf;

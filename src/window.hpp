@@ -17,6 +17,12 @@ private:
     Viewport *viewport;
     SDL_Event event;
 
+    // are we serving events?
+    //  events could be silenced for a number of reasons,
+    //  such as waiting for an animation to complete or
+    //  a process to finish.
+    // bool isServingEvents;
+
     int width;
     int height;
 
@@ -37,11 +43,15 @@ public:
 
     // returns true if there is an event in queue;
     // returns false if otherwise.
-    bool        isEvent();
+    bool isEvent();
 
-    // returns the SDL_Event, given that there is
-    // one in the queue (in which NULL is returned).
-    SDL_Event   getEvent();
+    // returns the SDL_Event, given that the window
+    // is serving them (in which NULL is returned).
+    //
+    // the only exception to the serving rule is when
+    // one of the events in the queue are either ones
+    // pertaining to an escape or quit.
+    SDL_Event getEvent();
 };
 
 #endif // APO_WINDOW_HPP__

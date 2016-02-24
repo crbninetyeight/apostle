@@ -150,6 +150,7 @@ int main(int argc, char** argv)
     Actor *actor;
     World *world;
 
+/*
     std::string input;  // input string.
     bool interactive = false;
 
@@ -158,6 +159,7 @@ int main(int argc, char** argv)
     std::cout << '\n';
     handle_arguments(argc, argv, &interactive);
     if (interactive) doinput(&input);
+*/
 
     SDL_Init( SDL_INIT_VIDEO );
 

@@ -9,8 +9,13 @@ Viewport::Viewport( int width, int height, int tileSize )
     this->width = width+2;
     this->height = height+2;
 
-    clipX = this->width;
-    clipY = this->height;
+    isClipSet = false;
+
+    curClipX = this->width;
+    curClipY = this->height;
+
+    lasClipX = curClipX;
+    lasClipY = curClipY;
 
     this->tileSize = tileSize;
 
@@ -18,10 +23,11 @@ Viewport::Viewport( int width, int height, int tileSize )
         0,
         (this->width-2)*tileSize, (this->height-2)*tileSize,
         24,
-        0x00FF0000,
-        0x0000FF00,
-        0x000000FF,
-        0xFF000000
+        // color mask //
+        0x00FF0000, // R
+        0x0000FF00, // G
+        0x000000FF, // B
+        0xFF000000  // A
     );
 
     tileColor = new Uint32*[width];
@@ -48,15 +54,15 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
     // the exterior clip anchor.
     // where (0,0) is the top-left corner of the world space.
-    clipX = x-((width-1)/2);
-    clipY = y-((height-1)/2);
+    curClipX = x-((width-1)/2);
+    curClipY = y-((height-1)/2);
 
-    world->fixClip( &clipX, &clipY, width, height );
+    world->fixClip( &curClipX, &curClipY, width, height );
 
     Uint32 color = 0xFF000000;
     for ( int i = 0; i < width; i++ ) {
         for ( int j = 0; j < height; j++ ) {
-            switch( world->getTileType(clipX+i, clipY+j) ) {
+            switch( world->getTileType(curClipX+i, curClipY+j) ) {
                 case TILE_ACTOR:
                 color = 0xFFFFFFFF;
                 break;

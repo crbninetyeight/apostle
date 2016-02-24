@@ -20,7 +20,7 @@ set (HEADERS
      src/tools.hpp
      src/viewport.hpp)
 
-add_executable (apostle ${SOURCES} ${HEADERS})
+add_executable (apostle WIN32 ${SOURCES} ${HEADERS})
 find_package (SDL2 REQUIRED)
 include_directories (${SDL2_INCLUDE_DIRS})
 target_link_libraries (apostle ${LIBS} ${SDL2_LIBRARIES})

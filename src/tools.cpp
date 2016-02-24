@@ -5,7 +5,6 @@ int Tools::Location::getX(const int nX, const int nD)
 	int rValue, tD;
 
 	tD = nD / 2;
-
 	rValue = nX - tD;
 
 	return rValue;
@@ -17,10 +16,8 @@ int Tools::Location::getY(const int nY, const int nD)
 	    tD;
 
 	tD = nD / 2;
-
 	nValue = nY * 2;
 	nValue = nY - nValue;
-
 	rValue = nValue + tD;
 
 	return rValue;
