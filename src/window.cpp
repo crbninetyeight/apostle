@@ -1,4 +1,4 @@
-#include <iostream>
+//#include <iostream>
 #include "window.hpp"
 #include "noise.hpp"
 #include <stdlib.h>
@@ -21,8 +21,8 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
     );
 
     if ( window == NULL ) {
-        std::cerr << "There was an error while creating the window.\n"
-            << SDL_GetError();
+        //std::cerr << "There was an error while creating the window.\n"
+            //<< SDL_GetError();
     }
 
     SDL_GetWindowSize( window, &width, &height );
@@ -31,7 +31,7 @@ ApoWindow::ApoWindow( const char* title, int width, int height )
     viewport = new Viewport( 11, 11, 32 );
 
     if ( front == NULL ) {
-        std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
+        //std::cerr << "CreateRGBSurface failed:\n" << SDL_GetError();
     }
 }
 
