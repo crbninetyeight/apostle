@@ -13,6 +13,8 @@
 
 ApoWindow::ApoWindow( const char* title, int width, int height )
 {
+    isServingEvents = true;
+
     window = SDL_CreateWindow(
         title,
         undefined, undefined,
@@ -51,14 +53,16 @@ void ApoWindow::drawSurface()
 
 }
 
-void ApoWindow::drawSurface( SDL_Surface *surface )
+int ApoWindow::drawSurface( SDL_Surface *surface )
 {
     SDL_BlitSurface( surface, NULL, front, NULL );
+    return 0;
 }
 
 void ApoWindow::drawViewport( Actor *actor, World *world )
 {
-    drawSurface( viewport->drawSurface(actor, world) );
+    if ( drawSurface(viewport->drawSurface(actor, world)) == VIEW_CHANGED )
+        isServingEvents = false;
 }
 
 void ApoWindow::updateWindow()
@@ -73,9 +77,13 @@ bool ApoWindow::isEvent()
 
 SDL_Event ApoWindow::getEvent()
 {
-    if ( SDL_PollEvent(&event) != 1 ) {
+    SDL_PollEvent( &event );
+
+    if ( isServingEvents ) {
         return event;
     } else {
-        return event;
+        SDL_Event dummy;
+        dummy.type = SDL_USEREVENT;
+        return dummy;
     }
 }

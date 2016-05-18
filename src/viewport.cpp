@@ -4,10 +4,8 @@ Viewport::Viewport( int width, int height, int tileSize )
 {
     isAnimating = false;
 
-    // two more rows and columns for pixels outside the drawing
-    // surface.
-    this->width = width+2;
-    this->height = height+2;
+    this->width = width;
+    this->height = height;
 
     isClipSet = false;
 
@@ -21,7 +19,7 @@ Viewport::Viewport( int width, int height, int tileSize )
 
     viewSurf = SDL_CreateRGBSurface(
         0,
-        (this->width-2)*tileSize, (this->height-2)*tileSize,
+        (this->width+2)*tileSize, (this->height+2)*tileSize,
         24,
         // color mask //
         0x00FF0000, // R
@@ -29,20 +27,11 @@ Viewport::Viewport( int width, int height, int tileSize )
         0x000000FF, // B
         0xFF000000  // A
     );
-
-    tileColor = new Uint32*[width];
-    for ( int i = 0; i < this->width; i++ ) {
-        tileColor[i] = new Uint32[this->height];
-    }
 }
 
 Viewport::~Viewport()
 {
     SDL_FreeSurface( viewSurf );
-
-    for ( int i = 0; i < width; i++ ) {
-        delete[] tileColor[i];
-    }   delete[] tileColor;
 }
 
 SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
@@ -59,47 +48,47 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
     world->fixClip( &curClipX, &curClipY, width, height );
 
+    SDL_Rect rect;
+    rect.w = tileSize;
+    rect.h = tileSize;
+
     Uint32 color = 0xFF000000;
-    for ( int i = 0; i < width; i++ ) {
-        for ( int j = 0; j < height; j++ ) {
+
+    int i = 0;
+    int j = 0;
+
+    do {
+        rect.y = (j*rect.h);
+
+        do {
+            rect.x = (i*rect.w);
+
             switch( world->getTileType(curClipX+i, curClipY+j) ) {
                 case TILE_ACTOR:
                 color = 0xFFFFFFFF;
                 break;
 
                 case TILE_DIRT:
-                color = 0xFFFF0000;
+                color = 0xFF9E450F;
                 break;
 
                 case TILE_BLANK:
-                color = 0xFF0000FF;
+                color = 0xFF47372B;
                 break;
             }
 
-            tileColor[i][j] = color;
-        }
-    }
+            SDL_FillRect( viewSurf, &rect, color );
+            i++;
+        } while ( i < width );
 
-    SDL_Rect rect;
-    rect.w = tileSize;
-    rect.h = tileSize;
-
-    for ( int i = 0; i < width-1; i++ ) {
-        for ( int j = 0; j < height-1; j++ ) {
-            rect.x = (i*rect.w);
-            rect.y = (j*rect.h);
-            SDL_FillRect( viewSurf, &rect, tileColor[i+1][j+1] );
-        }
-    }
+        i = 0;
+        j++;
+    } while ( j < height );
 
     return viewSurf;
 }
 
 void Viewport::clearSurface()
 {
-    for ( int i = 0; i < width; i++ ) {
-        for ( int j = 0; j < height; j++ ) {
-            tileColor[i][j] = 0xFF000000;
-        }
-    }
+    SDL_FillRect( viewSurf, NULL, 0x00000000 );
 }

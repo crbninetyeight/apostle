@@ -5,19 +5,20 @@
 #include "actor.hpp"
 #include "world.hpp"
 
+#define VIEW_CHANGED 1
+
 class Viewport
 {
 private:
     bool isAnimating;
     bool isClipSet;
-    
+
     int width, height;
     int curClipX, curClipY;
     int lasClipX, lasClipY;
     int tileSize;
 
     SDL_Surface *viewSurf;
-    Uint32 **tileColor;
 
 public:
     // creates a new viewport.

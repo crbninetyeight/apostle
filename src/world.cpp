@@ -83,18 +83,18 @@ void World::setActor( Actor *actor )
 
 void World::fixClip( int *clipX, int *clipY, int width, int height )
 {
-    if ( *clipX < -2 ) {
-        *clipX = -3;
+    if ( *clipX < -1 ) {
+        *clipX = -2;
     }
-    else if ( *clipX+width > set->getWidth()+2 ) {
-        *clipX = set->getWidth()-width+3;
+    else if ( *clipX+width > set->getWidth()+1 ) {
+        *clipX = set->getWidth()-width+2;
     }
 
-    if ( *clipY < -2 ) {
-        *clipY = -3;
+    if ( *clipY < -1 ) {
+        *clipY = -2;
     }
-    else if ( *clipY+height > set->getHeight()+2 ) {
-        *clipY = set->getHeight()-height+3;
+    else if ( *clipY+height > set->getHeight()+1 ) {
+        *clipY = set->getHeight()-height+2;
     }
 }
 

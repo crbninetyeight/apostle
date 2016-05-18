@@ -21,7 +21,7 @@ private:
     //  events could be silenced for a number of reasons,
     //  such as waiting for an animation to complete or
     //  a process to finish.
-    // bool isServingEvents;
+    bool isServingEvents;
 
     int width;
     int height;
@@ -34,7 +34,7 @@ public:
     void clearWindow();
 
     void drawSurface();
-    void drawSurface( SDL_Surface *surface );
+    int  drawSurface( SDL_Surface *surface );
     void drawViewport( Actor *actor, World *world );
 
     void updateWindow();
