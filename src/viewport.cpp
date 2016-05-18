@@ -48,6 +48,9 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
     world->fixClip( &curClipX, &curClipY, width, height );
 
+    lasClipX = curClipX;
+    lasClipY = curClipY;
+
     SDL_Rect rect;
     rect.w = tileSize;
     rect.h = tileSize;
@@ -66,6 +69,10 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
             switch( world->getTileType(curClipX+i, curClipY+j) ) {
                 case TILE_ACTOR:
                 color = 0xFFFFFFFF;
+                break;
+
+                case TILE_TREE:
+                color = 0xFF049158;
                 break;
 
                 case TILE_DIRT:

@@ -1,9 +1,14 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 #include "world.hpp"
 
 Tileset2::Tileset2( int x, int y )
 {
+    std::ifstream mapfile("mapfile.txt");
+    std::string mapdata;
+
     // build a Tileset given the parameters
     this->set = new Tile*[x];
     for ( int i = 0; i < x; i++ ) {
@@ -11,15 +16,28 @@ Tileset2::Tileset2( int x, int y )
     }
 
     // add dimensional contexts to the class
-    this->dime.width    = x;
-    this->dime.height   = y;
+    this->dime.width  = x;
+    this->dime.height = y;
 
     // fill in all Tiles of the set with blanks
     for ( int iy = 0; iy < this->dime.height; iy++ ) {
+        std::getline(mapfile, mapdata);
+        std::istringstream iss(mapdata);
         for ( int ix = 0; ix < this->dime.width; ix++ ) {
-            this->set[ix][iy].type          = TILE_DIRT;
-            this->set[ix][iy].location.x    = ix;
-            this->set[ix][iy].location.y    = iy;
+            char thing = -1;
+            iss >> thing;
+            switch (thing) {
+                case '0':
+                this->set[ix][iy].type = TILE_DIRT;
+                break;
+
+                case '1':
+                this->set[ix][iy].type = TILE_TREE;
+                break;
+            }
+
+            this->set[ix][iy].location.x = ix;
+            this->set[ix][iy].location.y = iy;
         }
     }
 }

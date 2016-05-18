@@ -19,6 +19,7 @@ struct Position2 {
 enum TileType {
     TILE_BLANK,
     TILE_DIRT,
+    TILE_TREE,
     TILE_ACTOR
 };
 

@@ -3,9 +3,10 @@
 #include "noise.hpp"
 #include <stdlib.h>
 
-#define RED 0xFFFF0000
-#define GRN 0xFF00FF00
-#define BLU 0xFF0000FF
+#define WHITE 0xFFFFFFFF
+#define RED   0xFFFF0000
+#define GRN   0xFF00FF00
+#define BLU   0xFF0000FF
 
 #define TILE_SIZE 32
 
