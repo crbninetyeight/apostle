@@ -1,6 +1,8 @@
 #ifndef APOCLI_TOOLS_H__
 #define APOCLI_TOOLS_H__
 
+#include <string>
+
 namespace Tools {
 	namespace Location {
 		int	getX(const int nX, const int nD),
@@ -12,6 +14,11 @@ namespace Tools {
 	namespace UI {
 		const char
 			*rtPane(const int yCount);
+	}
+	namespace Math {
+		unsigned long
+			hex_stage( std::string hex ),
+			ulong_pow( unsigned long base, unsigned long power );
 	}
 }
 

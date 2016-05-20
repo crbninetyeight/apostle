@@ -1,6 +1,9 @@
 #ifndef APO_VIEWPORT_HPP
 #define APO_VIEWPORT_HPP
 
+#include <string>
+#include <map>
+
 #include <SDL2/SDL.h>
 #include "actor.hpp"
 #include "world.hpp"
@@ -10,6 +13,8 @@
 class Viewport
 {
 private:
+    std::map<std::string, unsigned long> palette;
+    
     bool isAnimating;
     bool isClipSet;
 

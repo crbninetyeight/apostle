@@ -1,4 +1,9 @@
+#include <sstream>
+#include <fstream>
+#include <iostream>
+
 #include "viewport.hpp"
+#include "tools.hpp"
 
 Viewport::Viewport( int width, int height, int tileSize )
 {
@@ -27,6 +32,41 @@ Viewport::Viewport( int width, int height, int tileSize )
         0x000000FF, // B
         0xFF000000  // A
     );
+
+    // set up the palette
+    std::ifstream is( "palettefile.txt" );
+    std::string line;
+
+    while (std::getline(is, line)) {
+        std::istringstream iss(line);
+        line = iss.str();
+        std::string key = "";
+        std::string s_value = "";
+
+        int i = 0;
+        for (i = i; i < line.length(); i++) {
+            if (line.at(i) == ':') {
+                break;
+            } else {
+                key += line.at(i);
+            }
+        }
+
+        bool html_begun = false;
+        for (i = i; i < line.length(); i++) {
+            if (html_begun) {
+                if (line.at(i) != ' ') {
+                    s_value += line.at(i);
+                }
+            } else if (line.at(i) == '#') {
+                html_begun = true;
+                s_value += line.at(i);
+            }
+        }
+
+        palette[key] = Tools::Math::hex_stage( s_value );
+    }
+
 }
 
 Viewport::~Viewport()
@@ -68,19 +108,27 @@ SDL_Surface *Viewport::drawSurface( Actor *actor, World *world )
 
             switch( world->getTileType(curClipX+i, curClipY+j) ) {
                 case TILE_ACTOR:
-                color = 0xFFFFFFFF;
+                color = palette["actor"];
                 break;
 
                 case TILE_TREE:
-                color = 0xFF049158;
+                color = palette["tree"];
                 break;
 
                 case TILE_DIRT:
-                color = 0xFF9E450F;
+                color = palette["dirt"];
+                break;
+
+                case TILE_WATER:
+                color = palette["water"];
+                break;
+
+                case TILE_BUSH:
+                color = palette["bush"];
                 break;
 
                 case TILE_BLANK:
-                color = 0xFF47372B;
+                color = palette["blank"];
                 break;
             }
 

@@ -18,6 +18,8 @@ struct Position2 {
 // enumerator that describes tile types
 enum TileType {
     TILE_BLANK,
+    TILE_WATER,
+    TILE_BUSH,
     TILE_DIRT,
     TILE_TREE,
     TILE_ACTOR

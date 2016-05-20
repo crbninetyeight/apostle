@@ -27,12 +27,20 @@ Tileset2::Tileset2( int x, int y )
             char thing = -1;
             iss >> thing;
             switch (thing) {
-                case '0':
+                case '.':
                 this->set[ix][iy].type = TILE_DIRT;
                 break;
 
-                case '1':
+                case 't':
                 this->set[ix][iy].type = TILE_TREE;
+                break;
+
+                case '~':
+                this->set[ix][iy].type = TILE_WATER;
+                break;
+
+                case ',':
+                this->set[ix][iy].type = TILE_BUSH;
                 break;
             }
 
